@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
-
+//kjbhjhb
 class m150724_101722_group extends Migration
 {
     public function up()

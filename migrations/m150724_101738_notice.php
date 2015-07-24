@@ -2,7 +2,7 @@
 
 use yii\db\Schema;
 use yii\db\Migration;
-
+//kjfgkj
 class m150724_101738_notice extends Migration
 {
     public function up()
