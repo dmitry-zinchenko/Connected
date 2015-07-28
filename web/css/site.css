@@ -1,6 +1,7 @@
 html,
 body {
     height: 100%;
+    margin: 0;
 }
 
 .wrap {
@@ -89,3 +90,63 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+
+/* NEW */
+
+a, a:visited {
+    color: #3F51B5;
+    box-sizing: border-box;
+}
+
+a:hover, a:active {
+    color: #DD2C00;
+}
+
+.wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+/* */
+/* NAVIGATION */
+/* */
+
+.navbar {
+    width: 100%;
+}
+
+.navbar:after {
+
+}
+
+.navbar-fixed-top {
+    position: fixed;
+    top: 0px;
+}
+
+.navbar > .container {
+    margin: 0 auto;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    max-width: 1280px;
+}
+
+.navbar-brand {
+    display: block;
+    width: 200px;
+    height: 50px;
+    background: url('../images/logo_heading.png');
+}
+
+.navbar-toggle {
+    display: none;
+}
+
+a.sign-in {
+    border: 2px solid #3F51B5;
+}
+
+/* */
+/* --- NAVIGATION */
+/* */
