@@ -11,10 +11,10 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'WZ2yAdMnWlhKEEoReE25GJx8B5RnpL0l',
         ],
-         'authManager' => [
-        'class' => 'yii\rbac\PhpManager',
-        // 'defaultRoles' => ['admin', 'BRAND', 'TALENT'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
-    ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+            // 'defaultRoles' => ['admin', 'BRAND', 'TALENT'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
+        ],
         'urlManager' => [
                 'enablePrettyUrl' => true,
                 // Disable index.php

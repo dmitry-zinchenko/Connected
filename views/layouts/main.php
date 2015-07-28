@@ -36,8 +36,8 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Learn more', 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
             Yii::$app->user->isGuest ?
-                ['label' => 'Sign in', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'sign-in']] :
-                ['label' => 'Dashboard', 'url' => ['/user/index']],
+                ['label' => 'Sign in', 'url' => ['signin'], 'linkOptions' => ['class' => 'sign-in']] :
+                ['label' => 'Dashboard', 'url' => ['user/index']],
         ]
     ]);
     NavBar::end();

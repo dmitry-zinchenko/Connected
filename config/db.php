@@ -2,8 +2,8 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host='.getenv('IP').';dbname=connected',
-    'username' => getenv('C9_USER'),
-    'password' => '',
+    'dsn' => 'mysql:host=localhost;dbname=connected',
+    'username' => 'connected',
+    'password' => 'connected',
     'charset' => 'utf8',
 ];

@@ -11,7 +11,7 @@ $this->title = 'My Yii Application';
         <h1>One place for the whole team</h1>
 
         <p class="lead">You can easily share important information, idea and discuss it with your colleagues.</p>
-        <p><a class="btn btn-lg btn-danger" href="<?= Url::to('signup') ?>">Sign up</a></p>
+        <p><a class="btn btn-lg btn-danger" href="<?= Url::to(['signup']) ?>">Sign up</a></p>
         <div class="head-image">
             <img class="screenshot" src="/images/screenshot_interface.png" >
         </div>

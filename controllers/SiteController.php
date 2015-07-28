@@ -54,8 +54,10 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionLogin()
+    public function actionSignin()
     {
+        $this->layout = 'register';
+
          $pass = "";
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -63,17 +65,17 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->render('index');
+            return $this->redirect('index');
         } else {
             $pass = $model->password;
-            return $this->render('login', [
+            return $this->render('signin', [
                 'model' => $model,
                 'pass' => $pass
             ]);
         }
     }
 
-    public function actionLogout()
+    public function actionSignout()
     {
         Yii::$app->user->logout();
 
@@ -82,6 +84,7 @@ class SiteController extends Controller
 
    public function actionSignup()
     {
+        $this->layout = 'register';
        
         $user = new Users(['scenario' => 'signup']);
         //$user->scenario = 'signup';
