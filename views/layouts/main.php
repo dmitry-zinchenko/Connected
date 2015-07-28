@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
@@ -20,42 +21,41 @@ AppAsset::register($this);
 </head>
 <body>
 
-<?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                ]);
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Learn More', 'url' => ['/site/about']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Sign in', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                            
-                ],
-            ]);
-            NavBar::end();
-        ?>
+    <?php $this->beginBody() ?>
 
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
-        </div>
+    <?php
+    NavBar::begin([
+        'brandLabel' => '',
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-fixed-top',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Learn more', 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
+            Yii::$app->user->isGuest ?
+                ['label' => 'Sign in', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'sign-in']] :
+                ['label' => 'Dashboard', 'url' => ['/user/index']],
+        ]
+    ]);
+    NavBar::end();
+    ?>
+
+    <div class="wrap">
+        <?= $content ?>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('home') ?>"></a></p>
+                <p class="pull-right">&copy; <?= date('Y') ?> Connected Team</p>
+            </div>
+        </footer>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>
