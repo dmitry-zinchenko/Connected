@@ -16,7 +16,6 @@ $this->title = 'Sign in';
             'id' => 'login-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
                 'labelOptions' => ['class' => 'control-label'],
             ],
         ]); ?>
@@ -29,10 +28,8 @@ $this->title = 'Sign in';
             'template' => "<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
         ])->checkbox() ?>
 
-        <div class="form-group">
-            <div class="">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
-            </div>
+        <div class="form-group sign-block">
+            <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
