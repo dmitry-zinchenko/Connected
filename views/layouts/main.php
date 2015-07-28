@@ -21,40 +21,40 @@ AppAsset::register($this);
 </head>
 <body>
 
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<?php
-NavBar::begin([
-    'brandLabel' => '',
-    'brandUrl' => Yii::$app->homeUrl,
-    'options' => [
-        'class' => 'navbar-fixed-top',
-    ],
-]);
-echo Nav::widget([
-    'options' => ['class' => 'navbar-nav navbar-right'],
-    'items' => [
-        ['label' => 'Learn more', 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
-        Yii::$app->user->isGuest ?
-            ['label' => 'Sign in', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'sign-in']] :
-            ['label' => 'Dashboard', 'url' => ['/user/index']],
-    ]
-]);
-NavBar::end();
-?>
+    <?php
+    NavBar::begin([
+        'brandLabel' => '',
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-fixed-top',
+        ],
+    ]);
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => [
+            ['label' => 'Learn more', 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
+            Yii::$app->user->isGuest ?
+                ['label' => 'Sign in', 'url' => ['/site/login'], 'linkOptions' => ['class' => 'sign-in']] :
+                ['label' => 'Dashboard', 'url' => ['/user/index']],
+        ]
+    ]);
+    NavBar::end();
+    ?>
 
-<div class="wrap">
-    <?= $content ?>
-</div>
+    <div class="wrap">
+        <?= $content ?>
+    </div>
 
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left"><a class="logo-footer" href="<?= Url::to('home') ?>"></a></p>
-            <p class="pull-right">&copy; <?= date('Y') ?> Connected Team</p>
-        </div>
-    </footer>
+        <footer class="footer">
+            <div class="container">
+                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('home') ?>"></a></p>
+                <p class="pull-right">&copy; <?= date('Y') ?> Connected Team</p>
+            </div>
+        </footer>
 
-<?php $this->endBody() ?>
+    <?php $this->endBody() ?>
 
 </body>
 </html>
