@@ -56,6 +56,7 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+         $pass = "";
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -64,8 +65,10 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->render('index');
         } else {
+            $pass = $model->password;
             return $this->render('login', [
                 'model' => $model,
+                'pass' => $pass
             ]);
         }
     }
@@ -79,17 +82,21 @@ class SiteController extends Controller
 
    public function actionSignup()
     {
-        $user = new Users();
-        if ($user->load(\Yii::$app->request->post()) && $user->save()) {
-        return $this->redirect(['site/index']);
-            
-        }
-        else
+       
+        $user = new Users(['scenario' => 'signup']);
+        //$user->scenario = 'signup';
+        if ($user->load(\Yii::$app->request->post()) && $user->validate())
         {
+            $user->setPassword();
+            $user->setToken($user->getId()."token");
+            $user->setAuthKey("auth".$user->getId()."key");
+            $user->save(false);
+        return $this->redirect(['site/index']);
+        }
+        
         return $this->render('signup', [
             'user' => $user
         ]);
-    }
     }
 
     public function actionAbout()
