@@ -4,7 +4,6 @@ use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
