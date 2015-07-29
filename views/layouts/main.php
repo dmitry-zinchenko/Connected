@@ -34,9 +34,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Learn more', 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
+            ['label' => Yii::t('app', 'Learn more'), 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
             Yii::$app->user->isGuest ?
-                ['label' => 'Sign in', 'url' => ['signin'], 'linkOptions' => ['class' => 'sign-in']] :
+                ['label' => Yii::t('app', 'Sign in'), 'url' => ['signin'], 'linkOptions' => ['class' => 'sign-in']] :
                 ['label' => 'Dashboard', 'url' => ['user/index']],
         ]
     ]);
@@ -49,8 +49,8 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('home') ?>"></a></p>
-                <p class="pull-right">&copy; <?= date('Y') ?> Connected Team</p>
+                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('index') ?>"></a></p>
+                <p class="pull-right">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></p>
             </div>
         </footer>
 
