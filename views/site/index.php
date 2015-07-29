@@ -10,7 +10,7 @@ $this->title = 'My Yii Application';
     <section class="jumbotron">
         <h1>One place for the whole team</h1>
 
-        <p class="lead">You can easily share important information, idea and discuss it with your colleagues.</p>
+        <p class="lead">You can easily share important information, idea and discuss it with your colleagues</p>
         <p><a class="btn btn-lg btn-danger" href="<?= Url::to(['signup']) ?>">Sign up</a></p>
         <div class="head-image">
             <img class="screenshot" src="/images/screenshot_interface.png" >
@@ -22,7 +22,7 @@ $this->title = 'My Yii Application';
         <section class="row indigo" id="description">
             <div class="row-content">
                 <h2 class="row-header">Create notices</h2>
-                <p>You always have a lot to share. Just band your team together and send important information to all at once.</p>
+                <p>You always have a lot to share. Just band your team together and send important information to all at once</p>
                 <img class="row-image" src="/images/screenshot_notices.jpg">
             </div>
         </section>
@@ -32,7 +32,7 @@ $this->title = 'My Yii Application';
                 <h2 class="row-header">Collaborate</h2>
                 <div class="clearfix cols">
                     <div class="col-sm-6">
-                        <p>Notices are not just notices! It's a platform for discussions and making decisions.</p>
+                        <p>Notices are not just notices! It's a platform for discussions and making decisions</p>
                         <img class="row-image" src="/images/screenshot_notices.jpg">
                     </div>
                     <div class="col-sm-6">
