@@ -19,6 +19,7 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
+
     $('a#learn-more').click(function(e) {
         e.preventDefault();
         var scrollTop = $(window).width() > 767 ? $('#description').offset().top - 70 : $('#description').offset().top;
@@ -26,4 +27,6 @@ $(document).ready(function() {
             scrollTop: scrollTop,
         }), 1500
     });
+
+
 });

@@ -15,6 +15,7 @@ use app\assets\AppAsset;
 
 AppAsset::register($this);
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -36,7 +37,7 @@ AppAsset::register($this);
 </div>
 
 <footer class="register-footer">
-        &copy; <?= date('Y') ?> Connected Team
+        &copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?>
 </footer>
 
 <?php $this->endBody() ?>
