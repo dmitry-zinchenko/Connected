@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\RegisterForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -51,6 +52,11 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        if(!Yii::$app->user->isGuest) {
+
+        } else {
+
+        }
         return $this->render('index');
     }
 
@@ -58,13 +64,13 @@ class SiteController extends Controller
     {
         $this->layout = 'register';
 
-         $pass = "";
+        $pass = "";
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if ($model->load(\Yii::$app->request->post()) && $model->login()) {
             return $this->redirect('index');
         } else {
             $pass = $model->password;
@@ -82,28 +88,35 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-   public function actionSignup()
+    public function actionSignup()
     {
         $this->layout = 'register';
+
+        if(!\Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
        
-        $user = new Users(['scenario' => 'signup']);
-        //$user->scenario = 'signup';
-        if ($user->load(\Yii::$app->request->post()) && $user->validate())
+        $model = new RegisterForm();
+        if ($model->load(\Yii::$app->request->post()) && $model->register())
         {
-            $user->setPassword();
-            $user->setToken($user->getId()."token");
-            $user->setAuthKey("auth".$user->getId()."key");
-            $user->save(false);
-        return $this->redirect(['site/index']);
+            $user = Users::findByUsername($model->username);
+            Yii::$app->user->login($user);
+
+            return $this->redirect(['site/index']);
         }
         
         return $this->render('signup', [
-            'user' => $user
+            'model' => $model
         ]);
     }
 
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionSetLanguage() {
+
+        $this->goBack();
+    }
+
+    private function getLanguage() {
+        $cookies = \Yii::$app->request->cookies;
+        return $cookies->getValue('language', 'en-US');
     }
 }
