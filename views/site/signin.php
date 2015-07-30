@@ -6,17 +6,16 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
 
-$this->title = 'Sign in';
+$this->title = Html::encode('Connected - ') . Yii::t('app', 'Sign in');
 ?>
 <div class="site-login">
     <div class="login-form-back">
-        <h1><?= Html::encode($this->title) ?></h1>
+        <h1><?= Yii::t('app', 'Sign in') ?></h1>
 
         <?php $form = ActiveForm::begin([
             'id' => 'login-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
-                'template' => "{label}\n<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
                 'labelOptions' => ['class' => 'control-label'],
             ],
         ]); ?>
@@ -29,10 +28,8 @@ $this->title = 'Sign in';
             'template' => "<div class=\"\">{input}</div>\n<div class=\"\">{error}</div>",
         ])->checkbox() ?>
 
-        <div class="form-group">
-            <div class="">
-                <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
-            </div>
+        <div class="form-group sign-block">
+            <?= Html::submitButton(Yii::t('app', 'Sign in'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

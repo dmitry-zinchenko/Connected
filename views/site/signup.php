@@ -3,24 +3,33 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Users;
+
+$this->title = Html::encode('Connected - ') . Yii::t('app', 'Sign up');
 ?>
-<h1>Register</h1>
 
-<p>
-<?php
+<div class="site-login">
+    <div class="login-form-back">
+        <h1><?= Yii::t('app', 'Sign up') ?></h1>
 
-$form = ActiveForm::begin() ?>
-    <?= $form->field($user, 'username') ?>
-    <?= $form->field($user, 'email') ?>
-    <?= $form->field($user, 'password')->passwordInput() ?>
-    <?= $form->field($user, 'repeat_password')->passwordInput() ?>
-    <?= $form->field($user, 'first_name') ?>
-    <?= $form->field($user, 'last_name') ?>
+        <?php $form = ActiveForm::begin([
+            'id' => 'login-form',
+            'options' => ['class' => 'form-horizontal'],
+            'fieldConfig' => [
+                'labelOptions' => ['class' => 'control-label'],
+            ],
+        ]) ?>
 
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Register',['class' => 'btn btn-primary']) ?>
-        </div>
+            <?= $form->field($model, Yii::t('app', 'username')) ?>
+            <?= $form->field($model, 'email') ?>
+            <?= $form->field($model, 'password')->passwordInput() ?>
+            <?= $form->field($model, 'repeat_password')->passwordInput() ?>
+            <?= $form->field($model, 'first_name') ?>
+            <?= $form->field($model, 'last_name') ?>
+
+            <div class="form-group sign-block">
+                    <?= Html::submitButton(Yii::t('app', 'Create account'), ['class' => 'btn btn-primary login-button']) ?>
+            </div>
+
+        <?php ActiveForm::end() ?>
     </div>
-<?php ActiveForm::end() ?>
-</p>
+</div>

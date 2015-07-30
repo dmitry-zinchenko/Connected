@@ -17,20 +17,18 @@ use Yii;
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     
-    public $repeat_password;
-    
     public function beforeAction($action)
-{
-    if (parent::beforeAction($action)) {
-        if (!\Yii::$app->user->can($action->id)) {
-            //throw new ForbiddenHttpException('Access denied');
-            echo "error";
+    {
+        if (parent::beforeAction($action)) {
+            if (!\Yii::$app->user->can($action->id)) {
+                throw new ForbiddenHttpException('Access denied');
+    //            echo "error";
+            }
+            return true;
+        } else {
+            return false;
         }
-        return true;
-    } else {
-        return false;
     }
-}
     /**
      * @inheritdoc
      */
@@ -38,24 +36,13 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return 'users';
     }
-
-    /**
-     * @inheritdoc
-     */
-     public function scenarios()
-         {
-             $scenarios = parent::scenarios();
-             $scenarios['signup'] = ['username', 'password', 'first_name', 'last_name', 'email', 'repeat_password'];//Scenario Values Only Accepted
-             return $scenarios;
-    }
      
     public function rules()
     {
         return [
-            [['username', 'password', 'first_name', 'last_name', 'email', 'repeat_password'], 'required'],
-            ['username', 'unique'],
+            [['username', 'password', 'first_name', 'last_name', 'email'], 'required'],
+            [['username', 'email'], 'unique'],
             [['username', 'password', 'first_name', 'last_name', 'email'], 'string', 'max' => 64],
-            ['repeat_password', 'compare', 'compareAttribute'=>'password', 'message'=>"Passwords don't match",'on'=>'signup']
         ];
     }
 
@@ -68,8 +55,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'id' => Yii::t('app', 'ID'),
             'username' => Yii::t('app', 'Username'),
             'password' => Yii::t('app', 'Password'),
-            'first_name' => Yii::t('app', 'First Name'),
-            'last_name' => Yii::t('app', 'Last Name'),
+            'first_name' => Yii::t('app', 'Firstname'),
+            'last_name' => Yii::t('app', 'Lastname'),
             'email' => Yii::t('app', 'Email'),
             'authKey' => Yii::t('app', 'authKey'),
             'accessToken' => Yii::t('app', 'accessToken')

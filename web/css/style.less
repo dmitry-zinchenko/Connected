@@ -47,10 +47,12 @@ body {
 .jumbotron {
   text-align: center;
   background-color: transparent;
-}
-
-.jumbotron .btn {
-  font-size: 21px;
+  a:visited {
+    color: #fff;
+  }
+  .btn {
+    font-size: 21px;
+  }
 }
 
 //.not-set {
@@ -250,6 +252,7 @@ a:hover, a:active {
   }
   .lead {
     margin-bottom: 30px;
+    color: @secondaryText;
   }
 }
 
@@ -409,34 +412,39 @@ a:hover, a:active {
 
 .site-login {
   min-width: 310px;
-  max-width: 400px;
+  max-width: 500px;
   padding: 10px;
 }
 
 .login-form-back {
   padding: 20px;
   box-sizing: border-box;
-  background: @bluegray50;
+  background: #fff;
   border-radius: 4px;
   .box-shadow();
   h1 {
     margin: 0;
     padding-bottom: 30px;
+    font-size: 28px;
     text-align: center;
     color: @text;
   }
   .form-group:last-child {
     margin-bottom: 0;
   }
-  .login-button {
-    display: block;
-    padding: 15px 40px;
-    width: 80%;
-    margin: 0 auto;
-    font-size: 16px;
-    text-transform: uppercase;
-    .transition();
+  .sign-block {
+    margin-top: 40px;
+    .login-button {
+      display: block;
+      padding: 15px 10px;
+      width: 70%;
+      margin: 0 auto;
+      font-size: 16px;
+      text-transform: uppercase;
+      .transition();
+    }
   }
+
 }
 
 .register-footer {

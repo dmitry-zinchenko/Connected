@@ -12,7 +12,7 @@ $config = [
             'cookieValidationKey' => 'WZ2yAdMnWlhKEEoReE25GJx8B5RnpL0l',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
+            'class' => 'yii\rbac\DbManager',
             // 'defaultRoles' => ['admin', 'BRAND', 'TALENT'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
         ],
         'urlManager' => [
@@ -61,6 +61,19 @@ $config = [
                 ],
             ],
         ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
@@ -73,9 +86,9 @@ if (YII_ENV_DEV) {
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
-'class'=>'yii\gii\Module',
-'allowedIPs'=>['*']
-];
+        'class'=>'yii\gii\Module',
+        'allowedIPs'=>['*']
+    ];
 }
 
 return $config;

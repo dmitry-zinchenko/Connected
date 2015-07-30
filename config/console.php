@@ -18,7 +18,7 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
+            'class' => 'yii\rbac\DbManager',
         ],
         'log' => [
             'targets' => [
