@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "notices".
@@ -33,8 +37,26 @@ class Notices extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['text'], 'string'],
+            [['create_at'], 'safe'],
             [['group_id', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 100]
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_at',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'author_id',
+                'updatedByAttribute' => false,
+            ]
         ];
     }
 
@@ -58,5 +80,9 @@ class Notices extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
 
-
+    public function setAuthorID($id)
+    {
+        $this->author_id = $id;
+        //$this->save();
+    }
 }
