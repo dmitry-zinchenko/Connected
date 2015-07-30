@@ -12,7 +12,7 @@ $config = [
             'cookieValidationKey' => 'WZ2yAdMnWlhKEEoReE25GJx8B5RnpL0l',
         ],
         'authManager' => [
-            'class' => 'yii\rbac\PhpManager',
+            'class' => 'yii\rbac\DbManager',
             // 'defaultRoles' => ['admin', 'BRAND', 'TALENT'], // Здесь нет роли "guest", т.к. эта роль виртуальная и не присутствует в модели UserExt
         ],
         'urlManager' => [
