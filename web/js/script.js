@@ -28,5 +28,9 @@ $(document).ready(function() {
         }), 1500
     });
 
+    $('#lang-select').on('change', function() {
+        $('#lang-form').submit();
+    })
+
 
 });

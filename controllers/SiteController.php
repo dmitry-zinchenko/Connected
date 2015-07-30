@@ -13,7 +13,6 @@ use app\models\ContactForm;
 use app\models\Users;
 class SiteController extends Controller
 {
-   
     public function behaviors()
     {
         return [
@@ -52,6 +51,10 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+//        $pref = ['ru-RU', 'en-US'];
+//        \Yii::$app->language = \Yii::$app->request->getPreferredLanguage($pref);
+
+
         if(!Yii::$app->user->isGuest) {
 
         } else {
@@ -110,13 +113,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionSetLanguage() {
+    public function actionLanguage() {
 
-        $this->goBack();
-    }
-
-    private function getLanguage() {
-        $cookies = \Yii::$app->request->cookies;
-        return $cookies->getValue('language', 'en-US');
     }
 }

@@ -5,6 +5,7 @@ return [
     'Sign in' => 'Войти',
     'Sign up' => 'Регистрация',
     'Sign out' => 'Выйти',
+    'Change language' => 'Изменить язык',
 
     'Connected - a platform to collaborate with team' => 'Connected - платформа для взаимодействия с командой',
 

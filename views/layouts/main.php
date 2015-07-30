@@ -49,8 +49,20 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('index') ?>"></a></p>
-                <p class="pull-right">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></p>
+                <div class="pull-left"><a class="logo-footer" href="<?= Url::to('index') ?>"></a></div>
+                <div class="pull-right">
+                    <span class="copyright">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></span>
+                    <div class="language-selector">
+                        <form id="lang-form" method="post" action="/">
+                            <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
+                            <select id="lang-select" name="language">
+                                <option selected disabled><?= Yii::t('app', 'Change language') ?></option>
+                                <option value="en-US">English</option>
+                                <option value="ru-RU">Русский</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
             </div>
         </footer>
 
