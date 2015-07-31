@@ -101,10 +101,8 @@ class SiteController extends Controller
         {
             $user = Users::findByUsername($model->username);
             Yii::$app->user->login($user);
-
             return $this->redirect(['site/index']);
         }
-        
         return $this->render('signup', [
             'model' => $model
         ]);

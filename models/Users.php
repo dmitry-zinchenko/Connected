@@ -129,6 +129,26 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->authKey;
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getFirstname()
+    {
+        return $this->first_name;
+    }
+
+    public function getLastname()
+    {
+        return $this->last_name;
+    }
+
     /**
      * @inheritdoc
      */
@@ -157,9 +177,24 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->accessToken=Yii::$app->getSecurity()->generatePasswordHash($str);
     }
+
+    public function setPassword($str)
+    {
+        $this->password = $str;
+        $this->hashPassword();
+    }
     
-    public function setPassword()
+    public function hashPassword()
     {
         $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+    }
+
+    public function setFirstname($str)
+    {
+        $this->first_name=$str;
+    }
+    public function setLastname($str)
+    {
+        $this->last_name=$str;
     }
 }
