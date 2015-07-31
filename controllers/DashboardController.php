@@ -2,7 +2,8 @@
 
 namespace app\controllers;
 use app\models\AccountSettingsForm;
-use app\models\changePasswordForm;
+use app\models\ChangeGroupForm;
+use app\models\ChangePasswordForm;
 use app\models\CreateGroupForm;
 use app\models\Groups;
 use Yii;
@@ -45,7 +46,13 @@ class DashboardController extends \yii\web\Controller
 
     public function actionGroupSettings()
     {
-        return $this->render('group-settings');
+        $model = new ChangeGroupForm();
+        if($model->load(\Yii::$app->request->post()) && $model->changeGroup())
+        {
+            return $this->redirect(['dashboard/index']);
+        }
+
+        return $this->render('group-settings',['model' => $model]);
     }
 
     public function actionIndex()

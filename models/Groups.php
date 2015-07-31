@@ -10,6 +10,8 @@ use Yii;
  * @property integer $id
  * @property integer $owner_id
  * @property string $name
+ * @property string $description
+ * @property string $disabled
  */
 class Groups extends \yii\db\ActiveRecord
 {
@@ -29,7 +31,10 @@ class Groups extends \yii\db\ActiveRecord
         return [
             [['owner_id'], 'integer'],
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 64]
+            [['name'],'unique'],
+            [['name'], 'string', 'max' => 64],
+            [['disabled'], 'boolean'],
+            [['description'],'string', 'max' => 255]
         ];
     }
 
@@ -42,6 +47,8 @@ class Groups extends \yii\db\ActiveRecord
             'id' => 'ID',
             'owner_id' => 'Owner ID',
             'name' => 'Name',
+            'disabled' => 'Disabled',
+            'description' => 'Description'
         ];
     }
 }

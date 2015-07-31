@@ -13,6 +13,7 @@ class CreateGroupForm extends Model
 {
     public $owner_id;
     public $name;
+    public $description;
     private $_group;
     private $_user_group;
     /**
@@ -24,6 +25,7 @@ class CreateGroupForm extends Model
             [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 64],
+            [['description'], 'string', 'max' => 255]
             ];
     }
 
@@ -37,8 +39,8 @@ class CreateGroupForm extends Model
             $this->owner_id=\Yii::$app->user->getId();
             $this->_group=new Groups();
             $this->_group->setAttribute('owner_id',$this->owner_id);
-            $this->_group->setAttribute('owner_id',$this->owner_id);
             $this->_group->setAttribute('name',$this->name);
+            $this->_group->setAttribute('description',$this->description);
             if($this->_group->save())
             {
                 $this->_user_group = new UserGroups();
@@ -66,12 +68,9 @@ class CreateGroupForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('app', 'Username'),
-            'password' => Yii::t('app', 'Password'),
-            'email' => Yii::t('app', 'Email'),
-            'repeat_password' => Yii::t('app', 'Repeat Password'),
-            'first_name' => Yii::t('app', 'Firstname'),
-            'last_name' => Yii::t('app', 'Lastname'),
+            'name' => Yii::t('app', 'Name'),
+            'owner_id' => Yii::t('app', 'Owner_id'),
+            'description' => Yii::t('app', 'Description'),
         ];
     }
 }

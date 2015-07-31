@@ -17,6 +17,7 @@ use yii\widgets\ActiveForm;
         ]); ?>
 
         <?= $form1->field($model, 'name') ?>
+        <?= $form1->field($model, 'description') ?>
         <div class="form-group sign-block">
             <?= Html::submitButton(Yii::t('app', 'Apply'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>

@@ -44,8 +44,26 @@ class RbacController extends Controller
         $dropUser = $auth->createPermission('dropUser');
         $deletePost->description = 'Drop User';
         $auth->add($dropUser);
-        
-         // add "author" role and give this role the "createPost" permission
+
+        $changeGroup=$auth->createPermission('changeGroup');
+        $changeGroup->description='Change Group';
+        $auth->add($changeGroup);
+
+        $grantAuthor=$auth->createPermission('granAuthor');
+        $grantAuthor->description='Grant user rights of author';
+        $auth->add($grantAuthor);
+
+        $cancelAuthor=$auth->createPermission('cancelAuthor');
+        $cancelAuthor->description='Cancel user rights of author';
+        $auth->add($cancelAuthor);
+
+        $inviteUser = $auth->createPermission('inviteUser');
+        $inviteUser->description='Invite user in this group';
+        $auth->add($inviteUser);
+
+
+
+        // add "author" role and give this role the "createPost" permission
         $user = $auth->createRole('user');
         $auth->add($user);
         $auth->addChild($user, $createGroup);
@@ -84,6 +102,10 @@ class RbacController extends Controller
         $auth->addChild($owner, $author);
         $auth->addChild($owner, $dropUser);
         $auth->addChild($owner, $updatePost);
+        $auth->addChild($owner, $changeGroup);
+        $auth->addChild($owner, $grantAuthor);
+        $auth->addChild($owner, $cancelAuthor);
+        $auth->addChild($owner, $inviteUser);
         // Assign roles to users. 1 and 2 are IDs returned by IdentityInterface::getId()
         // usually implemented in your User model.
         $auth->assign($user, 3);
