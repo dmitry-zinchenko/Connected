@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
+use app\components\Widgets\LanguageSelectorWidget;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -49,8 +50,24 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left"><a class="logo-footer" href="<?= Url::to('index') ?>"></a></p>
-                <p class="pull-right">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></p>
+                <div class="pull-left">
+                    <a class="logo-footer" href="<?= Yii::$app->request->baseUrl ?>"></a>
+                    <?= LanguageSelectorWidget::widget([
+                        'supportedLanguages' => [
+                            'en-US' => [
+                                'name' => 'English',
+                                'class' => 'lang-en',
+                            ],
+                            'ru-RU' => [
+                                'name' => 'Русский',
+                                'class' => 'lang-ru',
+                            ],
+                        ]
+                    ]); ?>
+                </div>
+                <div class="pull-right">
+                    <span class="copyright">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></span>
+                </div>
             </div>
         </footer>
 

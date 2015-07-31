@@ -5,6 +5,8 @@ return [
     'Sign in' => 'Войти',
     'Sign up' => 'Регистрация',
     'Sign out' => 'Выйти',
+    'Change language' => 'Изменить язык',
+    'Change language:' => 'Сменить язык:',
 
     'Connected - a platform to collaborate with team' => 'Connected - платформа для взаимодействия с командой',
 
@@ -13,6 +15,10 @@ return [
     'Repeat Password' => 'Повторите пароль',
     'Firstname' => 'Имя',
     'Lastname' => 'Фамилия',
+    'Auth Key' => 'Auth Key',
+    'Access Token' => 'Access Token',
+    'Email' => 'Email',
+    'Language' => 'Язык',
     'Remember me' => 'Запомнить меня',
     'Create account' => 'Зарегистрироваться',
     'Passwords don\'t match' => 'Пароли должны совпадать',

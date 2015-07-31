@@ -51,6 +51,7 @@ class RegisterForm extends Model
             $this->_user->setPassword();
             $this->_user->setToken("{$this->_user->getId()}{$this->_user->username}token");
             $this->_user->setAuthKey("{$this->_user->getId()}{$this->_user->username}authkey");
+            $this->_user->setLanguage(Yii::$app->language);
 
             if(!$this->_user->save()) {
                 $this->addErrors($this->_user->errors);

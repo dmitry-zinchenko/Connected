@@ -13,6 +13,7 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  * @property string $email
+ * @property string $language
  */
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -58,8 +59,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'first_name' => Yii::t('app', 'Firstname'),
             'last_name' => Yii::t('app', 'Lastname'),
             'email' => Yii::t('app', 'Email'),
-            'authKey' => Yii::t('app', 'authKey'),
-            'accessToken' => Yii::t('app', 'accessToken')
+            'authKey' => Yii::t('app', 'Auth Key'),
+            'accessToken' => Yii::t('app', 'Access Token'),
+            'language' => Yii::t('app', 'Language'),
         ];
     }
 
@@ -161,5 +163,10 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function setPassword()
     {
         $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
+    }
+
+    public function setLanguage($language)
+    {
+        $this->language = $language;
     }
 }

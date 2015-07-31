@@ -1,5 +1,5 @@
 {
-    "require-dev": {
-        "yiisoft/yii2-gii": "*"
-    }
+  "require-dev": {
+      "yiisoft/yii2-gii": "*"
+  }
 }
