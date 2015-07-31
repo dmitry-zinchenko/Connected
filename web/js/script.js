@@ -28,7 +28,11 @@ $(document).ready(function() {
         }), 1500
     });
 
-    $('#lang-select').on('change', function() {
+    $('.lang').on('click', function(event) {
+        event.preventDefault();
+        var lang = $(this).attr('href').replace('#', '');
+        $('#lang-select').val(lang);
+        console.log($('#lang-select').val());
         $('#lang-form').submit();
     })
 

@@ -8,7 +8,7 @@ $config = [
     'bootstrap' => [
         'log',
         [
-            'class' => 'app\\components\\LanguageSelectorClass',
+            'class' => 'app\\components\\LanguageSelector',
             'supportedLanguages' => ['en-US', 'ru-RU'],
         ],
     ],

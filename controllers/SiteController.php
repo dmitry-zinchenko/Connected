@@ -74,7 +74,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(\Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('index');
+            return $this->goHome();
         } else {
             $pass = $model->password;
             return $this->render('signin', [
@@ -105,7 +105,7 @@ class SiteController extends Controller
             $user = Users::findByUsername($model->username);
             Yii::$app->user->login($user);
 
-            return $this->redirect(['site/index']);
+            return $this->goHome();
         }
         
         return $this->render('signup', [

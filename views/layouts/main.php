@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
+use app\components\Widgets\LanguageSelectorWidget;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -49,19 +50,23 @@ AppAsset::register($this);
 
         <footer class="footer">
             <div class="container">
-                <div class="pull-left"><a class="logo-footer" href="<?= Url::to('index') ?>"></a></div>
+                <div class="pull-left">
+                    <a class="logo-footer" href="<?= Yii::$app->request->baseUrl ?>"></a>
+                    <?= LanguageSelectorWidget::widget([
+                        'supportedLanguages' => [
+                            'en-US' => [
+                                'name' => 'English',
+                                'class' => 'lang-en',
+                            ],
+                            'ru-RU' => [
+                                'name' => 'Русский',
+                                'class' => 'lang-ru',
+                            ],
+                        ]
+                    ]); ?>
+                </div>
                 <div class="pull-right">
                     <span class="copyright">&copy; <?= date('Y') ?> <?= Html::encode('Connected Team') ?></span>
-                    <div class="language-selector">
-                        <form id="lang-form" method="post" action="/">
-                            <input type="hidden" name="_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />
-                            <select id="lang-select" name="language">
-                                <option selected disabled><?= Yii::t('app', 'Change language') ?></option>
-                                <option value="en-US">English</option>
-                                <option value="ru-RU">Русский</option>
-                            </select>
-                        </form>
-                    </div>
                 </div>
             </div>
         </footer>

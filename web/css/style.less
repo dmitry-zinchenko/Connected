@@ -292,6 +292,10 @@ a:hover, a:active {
     margin: 0px auto;
   }
 
+  .logo-footer {
+    margin-top: 35px;
+  }
+
 }
 
 @media (min-width: 768px) {
@@ -315,6 +319,11 @@ a:hover, a:active {
   .body-landing {
     margin-top: 500px;
   }
+
+  .logo-footer {
+    margin-top: 20px;
+  }
+
 }
 
 .feature {
@@ -366,8 +375,7 @@ a:hover, a:active {
 
 .footer {
   margin-top: 50px;
-  height: 100px;
-  line-height: 100px;
+  min-height: 100px;
   background-color: @indigolanding;
   color: #fff;
   p {
@@ -376,10 +384,12 @@ a:hover, a:active {
   }
   .logo-footer {
     display: block;
-    margin-top: 35px;
     width: 120px;
     height: 30px;
     background: url('../images/logo_heading_white_s.png') no-repeat;
+  }
+  .copyright {
+    line-height: 100px;
   }
 }
 
@@ -455,4 +465,101 @@ a:hover, a:active {
 
 /* */
 /* --- Sign up & Sign in */
+/* */
+
+
+/* */
+/* Language selector */
+/* */
+
+.language-selector {
+  display: inline-block;
+  margin-top: 15px;
+  line-height: 25px;
+}
+
+#lang-form {
+  display: none;
+  //position: relative;
+  //.arrow:after {
+  //  content: "";
+  //  position: absolute;
+  //  top: 50%; right: 10px;
+  //  transform: translateY(-50%);
+  //  display: block;
+  //  width: 10px;
+  //  height: 10px;
+  //  background: url('../images/arrow_down.png') no-repeat;
+  //  pointer-events: none;
+  //}
+  //select {
+  //  display: inline-block;
+  //  padding: 0 25px 0 15px;
+  //  box-sizing: border-box;
+  //
+  //  background: @indigo100;
+  //  border: none;
+  //  border-radius: 4px;
+  //
+  //  color: #000;
+  //  -webkit-appearance: none;
+  //  -moz-appearance: none;
+  //  appearance: none;
+  //  outline: none;
+  //  vertical-align: middle;
+  //  cursor: pointer;
+  //  .transition(box-shadow);
+  //  &:hover {
+  //    .box-shadow(5px, rgba(0.0, 0.0, 0.0, 0.5));
+  //  }
+  //  &:focus {
+  //    .box-shadow(10px, rgba(0.0, 0.0, 0.0, 0.5));
+  //  }
+  //
+  //  option {
+  //    height: 20px;
+  //    padding: 5px 5px 5px 15px;
+  //  }
+  //}
+  //select::-ms-expand { /* for IE 11 */
+  //  display: none;
+  //}
+}
+
+@media (max-width: 767px) {
+  .lang-changer {
+    display: none;
+  }
+}
+
+.lang-changer {
+  a, a:visited {
+    color: #fff;
+  }
+  span {
+    position: relative;
+    display: inline-block;
+    padding-left: 35px;
+    line-height: 20px;
+  }
+}
+
+.lang:before {
+  content: "";
+  position: absolute;
+  top: 0; left: 10px;
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.lang-en:before {
+  background: url('../images/flag_usa.png') no-repeat;
+}
+.lang-ru:before {
+  background: url('../images/flag_rus.png') no-repeat;
+}
+
+/* */
+/* --- Language selector */
 /* */
