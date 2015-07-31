@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "messages".
@@ -29,10 +32,27 @@ class Messages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['author_id', 'text', 'created_at', 'group_id'], 'required'],
+            [['text'], 'required'],
             [['author_id', 'group_id'], 'integer'],
             [['text'], 'string'],
             [['created_at'], 'safe']
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'author_id',
+                'updatedByAttribute' => false,
+            ]
         ];
     }
 
@@ -48,5 +68,10 @@ class Messages extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'group_id' => 'Group ID',
         ];
+    }
+
+    public function getAuthor()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
 }
