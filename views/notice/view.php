@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notices */
+/* @var $model_comments app\models\Comments */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notices'), 'url' => ['index']];
@@ -44,6 +45,29 @@ $this->params['breadcrumbs'][] = $this->title;
             ], */
             //'author_id',
         ],
+    ]) ?>
+
+</div>
+
+<div class="comments">
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            //'id',
+            'text:ntext',
+            'author.first_name',
+            'created_at',
+        ],
+    ]);
+
+    ?>
+
+    <?=
+    $this->render('_comments', [
+        'model_comments' => $model_comments,
     ]) ?>
 
 </div>

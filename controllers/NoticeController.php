@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Notices;
+use app\models\Comments;
 use yii\data\ArrayDataProvider;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 
 /**
  * NoticeController implements the CRUD actions for Notices model.
@@ -51,7 +54,23 @@ class NoticeController extends Controller
      */
     public function actionView($id)
     {
+        $model_comments = new Comments();
+
+         if($model_comments->load(Yii::$app->request->post()) && $model_comments->save())
+             $this->redirect(Url::toRoute(['notice/view', 'id' => $id]));
+
+        //$query = Notices::find()->with('author')->all();
+        $model_comments->notice_id = $id;
+
+        $dataProvider = new ActiveDataProvider([
+            /*'allModels' => $query,
+            'key' => 'id',*/
+            'query' => Comments::find()->where(['notice_id' => $id]),
+        ]);
+
         return $this->render('view', [
+            'model_comments' => $model_comments,
+            'dataProvider' => $dataProvider,
             'model' => $this->findModel($id),
         ]);
     }
@@ -105,6 +124,11 @@ class NoticeController extends Controller
      */
     public function actionDelete($id)
     {
+        $comments = Comments::find()->where(['notice_id' => $id])->all();
+        foreach ($comments as $comment)
+        {
+            $comment->delete();
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
