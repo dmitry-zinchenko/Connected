@@ -29,7 +29,7 @@ AppAsset::register($this);
         'brandLabel' => '',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-fixed-top',
+            'class' => 'navbar-fixed-top navbar-main',
         ],
     ]);
     echo Nav::widget([
@@ -38,7 +38,7 @@ AppAsset::register($this);
             ['label' => Yii::t('app', 'Learn more'), 'url' => ['#learnmore'], 'linkOptions' => ['id' => 'learn-more']],
             Yii::$app->user->isGuest ?
                 ['label' => Yii::t('app', 'Sign in'), 'url' => ['signin'], 'linkOptions' => ['class' => 'sign-in']] :
-                ['label' => 'Dashboard', 'url' => ['user/index']],
+                ['label' => 'Dashboard', 'url' => ['dashboard/index']],
         ]
     ]);
     NavBar::end();

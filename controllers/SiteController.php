@@ -13,7 +13,18 @@ use app\models\ContactForm;
 use app\models\Users;
 class SiteController extends Controller
 {
-
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            // change layout for error action
+            if ($action->id=='error')
+                $this->layout ='register';
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public function behaviors()
     {
         return [
@@ -71,7 +82,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(\Yii::$app->request->post()) && $model->login()) {
-            return $this->redirect('index');
+            return $this->goHome();
         } else {
             $pass = $model->password;
             return $this->render('signin', [
@@ -101,20 +112,12 @@ class SiteController extends Controller
         {
             $user = Users::findByUsername($model->username);
             Yii::$app->user->login($user);
-            return $this->redirect(['site/index']);
+
+            return $this->goHome();
         }
+        
         return $this->render('signup', [
             'model' => $model
         ]);
-    }
-
-    public function actionSetLanguage() {
-
-        $this->goBack();
-    }
-
-    private function getLanguage() {
-        $cookies = \Yii::$app->request->cookies;
-        return $cookies->getValue('language', 'en-US');
     }
 }
