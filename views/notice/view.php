@@ -37,13 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'text:ntext',
             'create_at',
-            //'group_id',
             'author.first_name',
-           /* [
-                'label' => 'Author',
-                'value' => $model->author->first_name,
-            ], */
-            //'author_id',
         ],
     ]) ?>
 
@@ -51,15 +45,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="comments">
 
+    <h4><?= Html::encode('Comments') ?></h4>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            //'id',
             'text:ntext',
             'author.first_name',
             'created_at',
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons'=>[
+
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a(Yii::t('app', 'Delete'), ['deletecomment', 'id_comment' => $key], [
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this comment?'),
+                                'method' => 'post',
+                            ]
+                        ]);
+                    }
+
+                ],
+            ],
         ],
     ]);
 

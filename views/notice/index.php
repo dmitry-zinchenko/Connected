@@ -21,24 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'title',
             'text',
-
-            /* [
-             'class' => 'yii\grid\DataColumn',
-             'attribute' => 'author',
-             'value' => function() {
-                 //$model = $dataProvider->id;
-                 return $model->author->first_name;
-             }],*/
             'author.first_name',
-
-            'author.id',
-
             'create_at',
-            //'to',
-            //'author_id',
 
             ['class' => 'yii\grid\ActionColumn',
                 //'template' => '{view} {update} {delete}',

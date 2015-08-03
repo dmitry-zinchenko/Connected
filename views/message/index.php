@@ -16,11 +16,9 @@ use yii\grid\GridView;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'text:ntext',
             'author.first_name',
             'created_at',
-            //'group_id',
         ],
     ]);
     ?>

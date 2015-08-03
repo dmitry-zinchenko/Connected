@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
+use yii\filters\VerbFilter;
 
 /**
  * MessageController implements the CRUD actions for Messages model.
@@ -30,14 +31,6 @@ class MessageController extends Controller
         ]);
     }
 
-   /* protected function saveInDB()
-    {
-
-        $model->load(Yii::$app->request->post());
-        $model->save();
-
-    } */
-
     protected function findModel($id)
     {
         if (($model = Messages::findOne($id)) !== null) {
@@ -46,4 +39,5 @@ class MessageController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }
