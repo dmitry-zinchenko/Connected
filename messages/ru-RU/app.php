@@ -34,6 +34,7 @@ return [
     'Group settings' => 'Настройки группы',
     'My groups' => 'Мои группы',
     'Participating' => 'Участие',
+    'Disabled' => 'Отключенные',
     'Create new group' => 'Создать новую группу',
     'Open' => 'Открыть',
     'You are not a member of any group.' => 'Вы не состоите ни в одной группе.',
@@ -47,7 +48,7 @@ return [
     'Old password' => 'Старый пароль',
     'New password' => 'Новый пароль',
     'Repeat' => 'Повторить',
-    'Change password' => 'Сохранить пароль',
+    'Save password' => 'Сохранить пароль',
     'Delete Account' => 'Удалить профиль',
     'Your avatar' => 'Аватар',
 

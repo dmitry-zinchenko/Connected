@@ -40,7 +40,7 @@ AppAsset::register($this);
             'url' => ['index'],
             'linkOptions' => ['class' => 'dash-link link-profile']
         ],
-        ['label' => Yii::t('app', 'Settings'), 'url' => ['dashboard/settings'], 'linkOptions' => ['class' => 'dash-link link-settings']],
+        ['label' => Yii::t('app', 'Settings'), 'url' => ['account-settings'], 'linkOptions' => ['class' => 'dash-link link-settings']],
         ['label' => Yii::t('app', 'Sign out'), 'url' => ['site/signout'], 'linkOptions' => ['class' => 'dash-link link-signout']],
     ];
     NavBar::begin([

@@ -17,14 +17,15 @@ use yii\Helpers\Url;
             ],
         ]); ?>
 
-        <?= $form1->field($model, 'name')->textInput(['value' => $model->name, 'disabled' => 'disabled']) ?>
-        <?= $form1->field($model, 'description') ?>
+        <?= $form1->field($model, 'identifier')->textInput(['value' => $model->getGroup()->identifier, 'disabled' => 'disabled']) ?>
+        <?= $form1->field($model, 'name')->textInput(['value' => $model->getGroup()->name]) ?>
+        <?= $form1->field($model, 'description')->textInput(['value' => $model->getGroup()->description]) ?>
         <div class="form-group sign-block">
             <?= Html::submitButton(Yii::t('app', 'Apply'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>
 
-        <?= Html::a($disable, Url::toRoute( ['dashboard/disable','name'=>$name]),['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
-        <?= Html::a("Delete", Url::toRoute( ['dashboard/delete','name'=>$name]),['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
+        <?= Html::a($disable, Url::toRoute( ['dashboard/disable','identifier'=>$identifier]),['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
+        <?= Html::a("Delete", Url::toRoute( ['dashboard/delete','identifier'=>$identifier]),['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
 
         </div>
 

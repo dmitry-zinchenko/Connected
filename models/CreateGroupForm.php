@@ -14,6 +14,7 @@ class CreateGroupForm extends Model
     public $owner_id;
     public $name;
     public $description;
+    public $identifier;
     private $_group;
     private $_user_group;
     /**
@@ -21,12 +22,12 @@ class CreateGroupForm extends Model
      */
     public function rules()
     {
-        return
-            [
-            [['name'], 'required'],
+        return [
+            [['name', 'identifier'], 'required'],
             [['name'], 'string', 'max' => 64],
-            [['description'], 'string', 'max' => 255]
-            ];
+            [['identifier'], 'string', 'max' => 50],
+            [['description'], 'string', 'max' => 255],
+        ];
     }
 
     /**
@@ -38,9 +39,10 @@ class CreateGroupForm extends Model
         if($this->validate()) {
             $this->owner_id=\Yii::$app->user->getId();
             $this->_group=new Groups();
-            $this->_group->setAttribute('owner_id',$this->owner_id);
-            $this->_group->setAttribute('name',$this->name);
-            $this->_group->setAttribute('description',$this->description);
+            $this->_group->setAttribute('owner_id', $this->owner_id);
+            $this->_group->setAttribute('name', $this->name);
+            $this->_group->setAttribute('description', $this->description);
+            $this->_group->setAttribute('identifier', $this->identifier);
             if($this->_group->save())
             {
                 $this->_user_group = new UserGroups();
@@ -71,6 +73,7 @@ class CreateGroupForm extends Model
             'name' => Yii::t('app', 'Name'),
             'owner_id' => Yii::t('app', 'Owner_id'),
             'description' => Yii::t('app', 'Description'),
+            'identifier' => Yii::t('app', 'Identifier')
         ];
     }
 }

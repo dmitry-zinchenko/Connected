@@ -193,8 +193,25 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->first_name=$str;
     }
+
     public function setLastname($str)
     {
         $this->last_name=$str;
     }
+
+    public function getOwnGroups() {
+        return $this->hasMany(Groups::className(), ['owner_id' => 'id'])->where(['disabled' => 0])->all();
+    }
+
+    public function getParticipatingGroups() {
+
+        return $this->hasMany(Groups::className(), ['id' => 'group_id'])
+            ->viaTable('user_groups', ['user_id' => 'id'])
+            ->where(['disabled' => 0])->andWhere('owner_id <> :owner')->addParams([':owner' => $this->id])->all();
+    }
+
+    public function getDisabledGroups() {
+        return $this->hasMany(Groups::className(), ['owner_id' => 'id'])->where(['disabled' => 1])->all();
+    }
+
 }

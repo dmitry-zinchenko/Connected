@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 <div class="site-login">
     <div class="login-form-back">
         <h1><?= Yii::t('app', 'Create Group') ?></h1>
-        <?php $form1 = ActiveForm::begin([
+        <?php $form = ActiveForm::begin([
             'id' => 'createGroup-form',
             'options' => ['class' => 'form-horizontal'],
             'fieldConfig' => [
@@ -16,8 +16,9 @@ use yii\widgets\ActiveForm;
             ],
         ]); ?>
 
-        <?= $form1->field($model, 'name') ?>
-        <?= $form1->field($model, 'description') ?>
+        <?= $form->field($model, 'identifier') ?>
+        <?= $form->field($model, 'name') ?>
+        <?= $form->field($model, 'description') ?>
         <div class="form-group sign-block">
             <?= Html::submitButton(Yii::t('app', 'Apply'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>
