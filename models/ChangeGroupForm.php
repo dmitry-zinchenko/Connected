@@ -13,7 +13,6 @@ class ChangeGroupForm extends Model
 {
     public $name;
     public $description;
-    public $disabled;
     private $_group;
     /**
      * @return array the validation rules.
@@ -22,23 +21,25 @@ class ChangeGroupForm extends Model
     {
         return
             [
-                [['name'], 'required'],
                 [['name'], 'string', 'max' => 64],
                 [['description'], 'string', 'max' => 255],
-                [['disabled'],'boolean']
             ];
     }
 
+    public function setParams()
+    {
+        $this->name = \Yii::$app->request->get('name');
+        $this->_group=Groups::find()->where(['name' => $this->name])->one();
+        $this->description=$this->_group['description'];
+    }
     /**
      * Logs in a user using the provided username and password.
      * @return boolean whether the user is logged in successfully
      */
     public function changeGroup()
     {
-        if($this->validate())
+        if($this->validate() && $this->_group=Groups::find()->where(['name' => $this->name])->one())
         {
-            $this->_group=Groups::find()->where(['name' => $this->name])->one();
-            $this->_group->setAttribute('disabled',$this->disabled);
             $this->_group->setAttribute('description',$this->description);
             if(!$this->_group->save())
             {
@@ -58,7 +59,6 @@ class ChangeGroupForm extends Model
     {
         return [
             'name' => Yii::t('app', 'Name'),
-            'disabled' => Yii::t('app', 'Disabled'),
             'description' => Yii::t('app', 'Description'),
         ];
     }

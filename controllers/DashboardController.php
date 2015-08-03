@@ -6,6 +6,7 @@ use app\models\ChangeGroupForm;
 use app\models\ChangePasswordForm;
 use app\models\CreateGroupForm;
 use app\models\Groups;
+use app\models\SetDisabledGroupForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web;
@@ -47,12 +48,21 @@ class DashboardController extends \yii\web\Controller
     public function actionGroupSettings()
     {
         $model = new ChangeGroupForm();
+        $model->setParams();
         if($model->load(\Yii::$app->request->post()) && $model->changeGroup())
         {
             return $this->redirect(['dashboard/index']);
         }
+        $name = \Yii::$app->request->get('name');
+        $group = Groups::find()->where(['name' =>$name] )->one();
+        $disable = (!$group['disabled']) ? 'Disable' : 'Enable';
 
-        return $this->render('group-settings',['model' => $model]);
+
+        return $this->render('group-settings',[
+            'model' => $model,
+            'disable' => $disable,
+            'name' => $name
+        ]);
     }
 
     public function actionIndex()
@@ -62,7 +72,47 @@ class DashboardController extends \yii\web\Controller
 
     public function actionSignOut()
     {
-        return $this->render('sign-out');
+        if(!\Yii::$app->user->logout()) {
+            return $this->render('sign-out');
+        }
+        return $this->redirect(['site/index']);
+    }
+
+    public function actionDisable()
+    {
+
+        $name = \Yii::$app->request->get('name');
+        if($group=Groups::find()->where(['name' => $name])->one()) {
+
+            if ($group['disabled']) {
+
+                $group->setAttribute('disabled', false);
+            } else {
+                $group->setAttribute('disabled', true);
+
+            }
+            if ($group->save()) {
+                return $this->redirect(['dashboard/index']);
+
+            }
+        }
+        return $this->redirect(['dashboard/group-settings?name='.$name]);
+
+    }
+
+    public function actionDelete()
+    {
+
+        $name = \Yii::$app->request->get('name');
+        if($group=Groups::find()->where(['name' => $name])->one()) {
+
+            if ($group->delete()) {
+                return $this->redirect(['dashboard/index']);
+
+            }
+        }
+        return $this->redirect(['dashboard/group-settings?name='.$name]);
+
     }
 
 }
