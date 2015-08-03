@@ -13,7 +13,6 @@ use Yii;
  * @property string $first_name
  * @property string $last_name
  * @property string $email
- * @property string $language
  */
 class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -59,9 +58,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'first_name' => Yii::t('app', 'Firstname'),
             'last_name' => Yii::t('app', 'Lastname'),
             'email' => Yii::t('app', 'Email'),
-            'authKey' => Yii::t('app', 'Auth Key'),
-            'accessToken' => Yii::t('app', 'Access Token'),
-            'language' => Yii::t('app', 'Language'),
+            'authKey' => Yii::t('app', 'authKey'),
+            'accessToken' => Yii::t('app', 'accessToken')
         ];
     }
 
@@ -131,6 +129,26 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->authKey;
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getFirstname()
+    {
+        return $this->first_name;
+    }
+
+    public function getLastname()
+    {
+        return $this->last_name;
+    }
+
     /**
      * @inheritdoc
      */
@@ -159,14 +177,24 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->accessToken=Yii::$app->getSecurity()->generatePasswordHash($str);
     }
+
+    public function setPassword($str)
+    {
+        $this->password = $str;
+        $this->hashPassword();
+    }
     
-    public function setPassword()
+    public function hashPassword()
     {
         $this->password = Yii::$app->getSecurity()->generatePasswordHash($this->password);
     }
 
-    public function setLanguage($language)
+    public function setFirstname($str)
     {
-        $this->language = $language;
+        $this->first_name=$str;
+    }
+    public function setLastname($str)
+    {
+        $this->last_name=$str;
     }
 }
