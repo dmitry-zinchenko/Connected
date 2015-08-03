@@ -6,14 +6,27 @@ use app\models\ChangeGroupForm;
 use app\models\ChangePasswordForm;
 use app\models\CreateGroupForm;
 use app\models\Groups;
-use app\models\SetDisabledGroupForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Users;
 class DashboardController extends \yii\web\Controller
 {
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            if (!\Yii::$app->user->can($action->id)) {
+                throw new ForbiddenHttpException('Access denied '.$action->id.' for '.\Yii::$app->user->id);
+
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function actionAccountSettings()
     {
         $modelAccount = new AccountSettingsForm();

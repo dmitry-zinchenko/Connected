@@ -10,6 +10,10 @@ class RbacController extends Controller
     {
         $auth = Yii::$app->authManager;
 
+        $index = $auth->createPermission('index');
+        $index->description = 'Access to index';
+        $auth->add($index);
+
         // add "createGroup" permission
         $createGroup = $auth->createPermission('createGroup');
         $createGroup->description = 'Create a group';
@@ -68,6 +72,7 @@ class RbacController extends Controller
         $auth->add($user);
         $auth->addChild($user, $createGroup);
         $auth->addChild($user, $chat);
+        $auth->addChild($user, $index);
         $auth->addChild($user, $leaveComment);
 
 

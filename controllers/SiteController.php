@@ -13,7 +13,7 @@ use app\models\ContactForm;
 use app\models\Users;
 class SiteController extends Controller
 {
-   
+
     public function behaviors()
     {
         return [
