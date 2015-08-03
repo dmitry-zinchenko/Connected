@@ -14,7 +14,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
         <p class="lead"><?= Html::encode('Делитесь важной информацией и идеями, а затем обсуждайте их со своими коллегами') ?></p>
         <p><a class="btn btn-lg btn-danger" href="<?= Url::to(['signup']) ?>"><?= Yii::t('app', 'Sign up') ?></a></p>
         <div class="head-image">
-            <img class="screenshot" src="/images/screenshot_interface.png" >
+            <img class="screenshot" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_interface.png" >
         </div>
     </section>
 
@@ -24,7 +24,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
             <div class="row-content">
                 <h2 class="row-header"><?= Html::encode('Создавайте объявления') ?></h2>
                 <p><?= Html::encode('У вас всегда есть то, что нужно донести до всей команды. Объедините людей в группу и отравляйте важную информацию всем сразу.') ?></p>
-                <img class="row-image" src="/images/screenshot_notices.jpg">
+                <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
             </div>
         </section>
 
@@ -34,11 +34,11 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                 <div class="clearfix cols">
                     <div class="col-sm-6">
                         <p><?= Html::encode('Объявления &mdash; это не просто объявления! Это целая платформа для обсуждения и принятия решений') ?></p>
-                        <img class="row-image" src="/images/screenshot_notices.jpg">
+                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
                     </div>
                     <div class="col-sm-6">
                         <p><?= Html::encode('Если вам нужно быстро сообщить всем что-то, вы всегда можете воспользоваться групповым чатом.') ?></p>
-                        <img class="row-image" src="/images/screenshot_notices.jpg">
+                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
             <div class="row-content">
                 <h2 class="row-header"><?= Html::encode('Используйте теги') ?></h2>
                 <p><?= Html::encode('Распределяйте объявления с помощью тегов. Добавляйте ключевые слова и используйте их для поиска по категориям.') ?></p>
-                <img class="row-image" src="/images/screenshot_notices.jpg">
+                <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
             </div>
         </section>
 
@@ -63,7 +63,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                                 <p><?= Html::encode('Вы можете создавать неограниченное количество групп и состоять в других без ограничений.') ?></p>
                             </div>
                             <div class="feature-image">
-                                <img src="">
+                                <img src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
                             </div>
                         </section>
                     </div>
@@ -74,7 +74,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                                 <p><?= Html::encode('Вы решаете, кто может смотреть, создавать и редактировать контент в вашей группе.') ?></p>
                             </div>
                             <div class="feature-image">
-                                <img src="">
+                                <img src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
                             </div>
                         </section>
                     </div>
