@@ -80,9 +80,4 @@ class Notices extends \yii\db\ActiveRecord
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
 
-    public function setAuthorID($id)
-    {
-        $this->author_id = $id;
-        //$this->save();
-    }
 }
