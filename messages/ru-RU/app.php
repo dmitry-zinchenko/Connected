@@ -10,6 +10,9 @@ return [
 
     'Connected - a platform to collaborate with team' => 'Connected - платформа для взаимодействия с командой',
 
+    'The above error occurred while the Web server was processing your request.' => 'При обработке запроса возникла ошибка.',
+    'Please contact us if you think this is a server error. Thank you.' => 'Свяжитесь с нами, если вы думаете, что это ошибка сервера.',
+
     'Username' => 'Имя пользователя',
     'Password' => 'Пароль',
     'Repeat Password' => 'Повторите пароль',
@@ -30,8 +33,10 @@ return [
     'Settings' => 'Настройки',
     'Group settings' => 'Настройки группы',
     'My groups' => 'Мои группы',
+    'Participating' => 'Участие',
     'Create new group' => 'Создать новую группу',
     'Open' => 'Открыть',
+    'You are not a member of any group.' => 'Вы не состоите ни в одной группе.',
     'Group name...' => 'Название группы...',
     'Make a short description of your group (not required)' => 'Краткое описание (необязательно)',
     'Add members...' => 'Добавить участников...',

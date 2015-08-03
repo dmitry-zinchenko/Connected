@@ -22,7 +22,7 @@ class LanguageSelector implements BootstrapInterface
             $user = Users::findOne(Yii::$app->user->getId());
         }
 
-        if(($preferredLanguage = $app->request->post('language')) && $user) {
+        if(($preferredLanguage = $app->request->get('language')) && $user) {
             $user->language = $preferredLanguage;
             $user->save();
         } elseif ($user) {

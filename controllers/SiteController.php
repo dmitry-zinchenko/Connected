@@ -13,6 +13,18 @@ use app\models\ContactForm;
 use app\models\Users;
 class SiteController extends Controller
 {
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            // change layout for error action
+            if ($action->id=='error')
+                $this->layout ='register';
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function behaviors()
     {
         return [
@@ -51,10 +63,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-//        $pref = ['ru-RU', 'en-US'];
-//        \Yii::$app->language = \Yii::$app->request->getPreferredLanguage($pref);
-
-
         if(!Yii::$app->user->isGuest) {
 
         } else {
