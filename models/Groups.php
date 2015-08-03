@@ -11,7 +11,7 @@ use Yii;
  * @property integer $owner_id
  * @property string $name
  * @property string $description
- * @property string $disabled
+ * @property integer $disabled
  */
 class Groups extends \yii\db\ActiveRecord
 {
@@ -29,12 +29,10 @@ class Groups extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['owner_id'], 'integer'],
+            [['owner_id', 'disabled'], 'integer'],
             [['name'], 'required'],
-            [['name'],'unique'],
-            [['name'], 'string', 'max' => 64],
-            [['disabled'], 'boolean'],
-            [['description'],'string', 'max' => 255]
+            [['description'], 'string'],
+            [['name'], 'string', 'max' => 64]
         ];
     }
 
@@ -44,11 +42,20 @@ class Groups extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'owner_id' => 'Owner ID',
-            'name' => 'Name',
-            'disabled' => 'Disabled',
-            'description' => 'Description'
+            'id' => Yii::t('app', 'ID'),
+            'owner_id' => Yii::t('app', 'Owner ID'),
+            'name' => Yii::t('app', 'Name'),
+            'description' => Yii::t('app', 'Description'),
+            'disabled' => Yii::t('app', 'Disabled'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return GroupsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new GroupsQuery(get_called_class());
     }
 }
