@@ -124,6 +124,7 @@ class DashboardController extends \yii\web\Controller
 
             }
         }
+
         return $this->redirect(['dashboard/group-settings?name='.$name]);
 
     }
