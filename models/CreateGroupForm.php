@@ -70,7 +70,7 @@ class CreateGroupForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app', 'Name'),
+            'name' => Yii::t('app', 'Group name'),
             'owner_id' => Yii::t('app', 'Owner_id'),
             'description' => Yii::t('app', 'Description'),
             'identifier' => Yii::t('app', 'Identifier')
