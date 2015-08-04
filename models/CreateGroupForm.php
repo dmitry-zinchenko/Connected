@@ -27,7 +27,10 @@ class CreateGroupForm extends Model
             [['name'], 'string', 'max' => 64],
             [['identifier'], 'string', 'min' => 3, 'max' => 50],
             [['description'], 'string', 'max' => 255],
-//            ['identifier', 'match', 'pattern' => "/[a-z0-9]$/"],
+            ['identifier', 'match', 'pattern' => "/^[a-z0-9-]+$/", "message" => Yii::t('app', 'Only \'a-z\', \'0-9\' and \'-\' are allowed.')],
+            ['identifier', 'match', 'pattern' => "/^[^-]/", "message" => Yii::t('app', 'Invalid symbol in the beginning.')],
+            ['identifier', 'match', 'pattern' => "/[^-]$/", "message" => Yii::t('app', 'Invalid symbol in the end.')],
+//            ['identifier', 'match', 'pattern' => "/^[a-z0-9]+[a-z0-9-]*[a-z0-9]+$/", "message" => "Only 'a-z' and '-' are allowed"],
 
         ];
     }
