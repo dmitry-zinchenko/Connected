@@ -15,13 +15,13 @@ use yii\filters\VerbFilter;
  */
 class MessageController extends Controller
 {
-    public function actionIndex()
+    public function actionIndex($group_id)
     {
         $model = new Messages();
-        if($model->load(Yii::$app->request->post()) && $model->save()) $this->redirect(Url::toRoute('message/index'));
+        if($model->load(Yii::$app->request->post()) && $model->save()) $this->redirect(Url::toRoute(['message/index', 'group_id' => $group_id]));
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Messages::find(),
+            'query' => Messages::find()->where(['group_id' => $group_id]),
         ]);
 
 
