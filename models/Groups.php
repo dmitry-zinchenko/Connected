@@ -63,4 +63,9 @@ class Groups extends \yii\db\ActiveRecord
         return new GroupsQuery(get_called_class());
     }
 
+    public function getUsers()
+    {
+        return $this->hasMany(Users::className(), ['id' => 'user_id'])
+            ->viaTable('user_groups', ['group_id' => 'id']);
+    }
 }

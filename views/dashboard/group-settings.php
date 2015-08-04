@@ -95,8 +95,6 @@ $dataProvider = new ActiveDataProvider([
 <section class="group-manage group-delete">
     <h3><?= Yii::t('app', 'Delete group') ?></h3>
     <p><?= Yii::t('app', 'Delete everything related to this group. This operation can not be undone!') ?></p>
-    <p class="text-center confirmation"><?= Yii::t('app', 'Will be available soon') ?></p>
-<!--    --><?//= Html::a(Yii::t('app', 'Delete'), Url::toRoute( ['dashboard/delete','identifier' => $identifier]),['class' => 'btn btn-danger']) ?>
+<!--    <p class="text-center confirmation">--><?//= Yii::t('app', 'Will be available soon') ?><!--</p>-->
+    <p class="text-center confirmation"><?= Html::a(Yii::t('app', 'Delete'), Url::toRoute( ['dashboard/delete','identifier' => $identifier]),['class' => 'btn btn-danger']) ?></p>
 </section>
-
-

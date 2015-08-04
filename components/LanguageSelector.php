@@ -18,6 +18,7 @@ class LanguageSelector implements BootstrapInterface
 
     public function bootstrap($app)
     {
+        $user = null;
         if(!\Yii::$app->user->isGuest) {
             $user = Users::findOne(Yii::$app->user->getId());
         }
