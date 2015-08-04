@@ -13,7 +13,7 @@ use yii\helpers\Url;
     <div class="lang-changer">
         <?= Yii::t('app', 'Change language:') ?>
         <?php foreach($languages as $locale => $params): ?>
-            <span><a class="lang <?= Html::encode($params['class']) ?>" href="<?= Html::encode('?language=' . $locale) ?>"><?= Html::encode($params['name']) ?></a></span>
+            <span><a class="lang <?= Html::encode($params['class']) ?>" href="<?= $queryParams ?><?= Html::encode('language=' . $locale) ?>"><?= Html::encode($params['name']) ?></a></span>
         <?php endforeach; ?>
     </div>
 </div>
