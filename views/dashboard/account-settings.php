@@ -3,11 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Users;
+
+$this->title = Yii::t('app', 'Account settings');
 ?>
 
-<div class="site-login">
-    <div class="login-form-back">
-        <h1><?= Yii::t('app', 'Account settings') ?></h1>
+<section class="block-dash">
+    <h1><?= Yii::t('app', 'Account settings') ?></h1>
+    <div class="form-dash">
         <?php $form1 = ActiveForm::begin([
             'id' => 'accountSettings-form',
             'options' => ['class' => 'form-horizontal'],
@@ -24,13 +26,17 @@ use app\models\Users;
 
         <?= $form1->field($modelAccount, 'last_name')->textInput(['value' => $modelAccount->getUser()['last_name']]) ?>
 
-        <div class="form-group sign-block">
-            <?= Html::submitButton(Yii::t('app', 'Apply'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
+        <div class="form-dash-button">
+            <?= Html::submitButton(Yii::t('app', 'Save profile'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
+    </div>
+</section>
 
-        <br><h1><?= Yii::t('app', 'Change password') ?></h1>
+<section class="block-dash">
+    <h1><?= Yii::t('app', 'Change password') ?></h1>
+    <div class="form-dash">
         <?php $form2 = ActiveForm::begin([
             'id' => 'changePassword-form',
             'options' => ['class' => 'form-horizontal'],
@@ -45,10 +51,10 @@ use app\models\Users;
 
         <?= $form2->field($modelPassword, 'repeat_password')->passwordInput() ?>
 
-        <div class="form-group sign-block">
-            <?= Html::submitButton(Yii::t('app', 'Apply'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
-        </div><br>
+        <div class="form-dash-button">
+            <?= Html::submitButton(Yii::t('app', 'Save password'), ['class' => 'btn btn-primary login-button', 'name' => 'login-button']) ?>
+        </div>
 
         <?php ActiveForm::end(); ?>
     </div>
-</div>
+</section>

@@ -682,7 +682,6 @@ a:hover, a:active {
 .group-block {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
   margin-bottom: 20px;
   padding: 20px;
   width: 250px;
@@ -692,10 +691,20 @@ a:hover, a:active {
   border: 3px solid @indigo500;
   border-radius: 4px;
   text-align: left;
-  cursor: pointer;
   .transition(box-shadow);
   &:hover {
     .box-shadow();
+  }
+  .group-settings {
+    position: absolute;
+    top: 20px; right: 20px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url('../images/sprite.png') -20px -70px no-repeat;
+    &:hover {
+      background: url('../images/sprite.png') -20px -90px no-repeat;
+    }
   }
   h3 {
     margin: 0;
@@ -742,12 +751,42 @@ a:hover, a:active {
   }
 }
 
+.block-dash {
+  padding-bottom: 50px;
+}
+
+@media (max-width: 583px) {
+  .groups-list {
+    text-align: center;
+  }
+  .group-block {
+    display: block;
+    margin: 0 auto 20px;
+  }
+}
+
+@media (min-width: 584px) {
+  .group-block {
+    margin-right: 20px;
+  }
+}
+
 @media (max-width: 767px) {
   .content-dash {
     padding: 0 20px;
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
   }
-  .groups-list {
+  .form-dash {
+    width: 100%;
+  }
+  .form-dash-button {
     text-align: center;
+  }
+  .group-manage h3 {
+    font-size: 22px;
   }
 }
 
@@ -755,6 +794,42 @@ a:hover, a:active {
   .content-dash {
     padding: 0 50px;
   }
+  .form-dash {
+    max-width: 500px;
+  }
+  .group-manage {
+    max-width: 500px;
+  }
+}
+
+a.btn:visited {
+  color: #fff;
+}
+
+.btn {
+  .transition(background-color);
+}
+
+.group-manage {
+  margin-bottom: 30px;
+  padding: 20px;
+  border-radius: 4px;
+  h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+  .confirmation {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.group-disable {
+  border: 2px solid #ed9c28;
+}
+
+.group-delete {
+  border: 2px solid #dd2c00;
 }
 
 /* */

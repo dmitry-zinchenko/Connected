@@ -33,7 +33,7 @@ class DashboardController extends \yii\web\Controller
         $modelAccount->setUser(\Yii::$app->user->getId());
         if($modelAccount->load(\Yii::$app->request->post()) && $modelAccount->updateProfile())
         {
-            return $this->redirect(['dashboard/index']);
+            return $this->redirect(['dashboard/']);
         }
 
         $modelPassword = new changePasswordForm();
@@ -41,7 +41,7 @@ class DashboardController extends \yii\web\Controller
 
         if($modelPassword->load(\Yii::$app->request->post()) && $modelPassword->updateProfile())
         {
-            return $this->redirect(['dashboard/index']);
+            return $this->redirect(['dashboard/']);
         }
 
         return $this->render('account-settings', [
@@ -69,12 +69,12 @@ class DashboardController extends \yii\web\Controller
             return $this->redirect(['dashboard/index']);
         }
         $group = Groups::find()->where(['identifier' => $identifier] )->one();
-        $disable = (!$group['disabled']) ? 'Disable' : 'Enable';
+        $disabled = $group['disabled'] ? true : false;
 
 
         return $this->render('group-settings',[
             'model' => $model,
-            'disable' => $disable,
+            'disabled' => $disabled,
             'identifier' => $identifier
         ]);
     }
@@ -90,14 +90,6 @@ class DashboardController extends \yii\web\Controller
             'participating' => $participating,
             'disabledGroups' => $disabledGroups,
         ]);
-    }
-
-    public function actionSignOut()
-    {
-        if(!\Yii::$app->user->logout()) {
-            return $this->render('sign-out');
-        }
-        return $this->redirect(['site/index']);
     }
 
     public function actionDisable($identifier)
