@@ -62,4 +62,5 @@ class Groups extends \yii\db\ActiveRecord
     {
         return new GroupsQuery(get_called_class());
     }
+
 }

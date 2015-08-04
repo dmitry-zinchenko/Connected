@@ -37,7 +37,7 @@ AppAsset::register($this);
     $items = [
         [
             'label' => Html::encode(\Yii::$app->user->identity->first_name . ' ' . \Yii::$app->user->identity->last_name),
-            'url' => ['index'],
+            'url' => ['dashboard/'],
             'linkOptions' => ['class' => 'dash-link link-profile']
         ],
         ['label' => Yii::t('app', 'Settings'), 'url' => ['account-settings'], 'linkOptions' => ['class' => 'dash-link link-settings']],

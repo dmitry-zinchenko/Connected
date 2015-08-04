@@ -71,11 +71,13 @@ class DashboardController extends \yii\web\Controller
         $group = Groups::find()->where(['identifier' => $identifier] )->one();
         $disabled = $group['disabled'] ? true : false;
 
+        $members = $group->getMembers();
 
         return $this->render('group-settings',[
             'model' => $model,
             'disabled' => $disabled,
-            'identifier' => $identifier
+            'identifier' => $identifier,
+            'members' => $members,
         ]);
     }
 
