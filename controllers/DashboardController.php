@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\AccountSettingsForm;
+use app\models\AddMemberForm;
 use app\models\ChangeGroupForm;
 use app\models\ChangePasswordForm;
 use app\models\CreateGroupForm;
@@ -68,10 +69,16 @@ class DashboardController extends \yii\web\Controller
         $model->setParams($identifier);
         if($model->load(\Yii::$app->request->post()) && $model->changeGroup())
         {
-            return $this->redirect(['dashboard/index']);
+            return $this->redirect(['group-settings', 'identifier' => $identifier]);
         }
         $group = Groups::find()->where(['identifier' => $identifier] )->one();
         $disabled = $group['disabled'] ? true : false;
+
+        $addMember = new AddMemberForm($group->id, 3);
+        if($addMember->load(\Yii::$app->request->post()) && $addMember->addMember())
+        {
+            return $this->redirect(['group-settings', 'identifier' => $identifier]);
+        }
 
         $members = $group->getMembers();
 
@@ -80,6 +87,7 @@ class DashboardController extends \yii\web\Controller
             'disabled' => $disabled,
             'identifier' => $identifier,
             'members' => $members,
+            'addMember' => $addMember,
         ]);
     }
 
@@ -128,7 +136,20 @@ class DashboardController extends \yii\web\Controller
             return $this->redirect(['dashboard/index']);
         }
 
-        return $this->redirect(['dashboard/group-settings?identifier=' . $identifier]);
+        return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+
+    }
+
+    public function actionDropUser($userId, $groupId, $identifier) {
+        UserGroups::findByUserAndGroup($userId, $groupId)->dropUser();
+        return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+
+    }
+
+    public function actionChangeRole($userId, $groupId, $roleId, $identifier) {
+        $userGroup = UserGroups::findByUserAndGroup($userId, $groupId);
+        $userGroup->changeRole($roleId);
+        return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
 
     }
 

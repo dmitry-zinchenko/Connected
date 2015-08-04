@@ -219,4 +219,15 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $this->hasMany(Groups::className(), ['owner_id' => 'id'])->where(['disabled' => 1])->all();
     }
 
+    public function getUserGroup($groupId) {
+        return $this->hasOne(UserGroups::className(), ['user_id' => 'id'])->where(['group_id' => $groupId])->one();
+    }
+
+    public function getRole($groupId) {
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'role_id'])
+            ->viaTable('user_groups', ['user_id' => 'id'], function($query) use ($groupId) {
+                $query->andWhere(['group_id' => $groupId]);
+            })->one();
+    }
+
 }

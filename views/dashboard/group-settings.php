@@ -1,9 +1,9 @@
 <?php
 /* @var $this yii\web\View */
+use yii\bootstrap\ButtonDropdown;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\Helpers\Url;
-use yii\widgets\ListView;
 use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
 
@@ -12,9 +12,10 @@ $this->title = Yii::t('app', 'Group settings') . Html::encode(' - ' . $model->ge
 $dataProvider = new ActiveDataProvider([
     'query' => $members,
     'pagination' => [
-        'pageSize' => 10,
+        'pageSize' => 5,
     ],
 ]);
+
 ?>
 
 <div class="clearfix">
@@ -47,33 +48,74 @@ $dataProvider = new ActiveDataProvider([
         <section class="block-dash">
             <h1><?= Yii::t('app', 'Group members') ?></h1>
             <div class="form-dash">
-
-                <?//= ListView::widget([
-                //    'dataProvider' => $dataProvider,
-                //    'itemOptions' => ['class' => 'item'],
-                //    'itemView' => function ($model, $key, $index, $widget) {
-                //        return Html::a(Html::encode($model->username), ['view', 'id' => $model->id]);
-                //    },
-                //]) ?>
-
                 <?= GridView::widget([
                     'dataProvider' => $dataProvider,
+                    'tableOptions' => ['class' => 'table table-striped table-bordered table-members'],
                     'columns' => [
+                        [
+                            'format' => 'text',
+                            'header' => Yii::t('app', 'Member'),
+                            'value' => function ($user) { return "$user->username ($user->first_name $user->last_name)"; },
+                        ],
+                        [
+                            'value' => function ($user, $key, $index, $column) use ($model) {
+                                $roles = \app\models\AuthAssignment::getAvailableRoles();
+                                foreach ($roles as $role) {
+                                    $items[] = [
+                                        'label' => $role->item_name,
+                                        'url' => Url::to([
+                                            'change-role',
+                                            'userId' => $user->id,
+                                            'groupId' => $model->getGroup()->id,
+                                            'roleId' => $role->user_id,
+                                            'identifier' => $model->getGroup()->identifier,
+                                        ])
+                                    ];
+                                }
 
-                        'username',
-
+                                return ButtonDropdown::widget([
+                                    'label' => $user->getRole($model->getGroup()->id)->item_name,
+                                    'dropdown' => [
+                                        'items' => $items,
+                                    ],
+                                ]);
+                            },
+                            'format' =>'raw',
+                            'header' => Yii::t('app', 'Role'),
+                        ],
                         [
                             'class' => 'yii\grid\ActionColumn',
                             'template' => '{drop}',
                             'buttons' => [
-                                'drop' => function ($url, $model) {
-                                    return Html::a('Drop', $url);
+                                'drop' => function ($url, $user) use ($model) {
+                                    return Html::a(
+                                        Yii::t('app', 'Drop'),
+                                        Url::to([
+                                            'dashboard/drop-user',
+                                            'userId' => $user->id,
+                                            'groupId' => $model->getGroup()->id,
+                                            'identifier' => $model->getGroup()->identifier,
+                                        ])
+                                    );
                                 }
                             ],
-                            'header' => 'Actions',
+                            'header' => Yii::t('app', 'Actions'),
                         ],
                     ],
                 ]) ?>
+
+                <?php $formMember = ActiveForm::begin([
+                    'id' => 'changeGroup-form',
+                    'options' => ['class' => 'form-horizontal'],
+                    'fieldConfig' => [
+                        'labelOptions' => ['class' => 'control-label'],
+                    ],
+                ]); ?>
+
+                <?= $formMember->field($addMember, 'username')->label(Yii::t('app', 'Add member')) ?>
+
+                <?php ActiveForm::end(); ?>
+
             </div>
         </section>
     </div>
