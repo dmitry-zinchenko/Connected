@@ -13,6 +13,7 @@ class ChangeGroupForm extends Model
 {
     public $name;
     public $description;
+    public $identifier;
     private $_group;
     /**
      * @return array the validation rules.
@@ -26,11 +27,12 @@ class ChangeGroupForm extends Model
             ];
     }
 
-    public function setParams()
+    public function setParams($identifier)
     {
-        $this->name = \Yii::$app->request->get('name');
-        $this->_group=Groups::find()->where(['name' => $this->name])->one();
-        $this->description=$this->_group['description'];
+        $this->identifier = $identifier;
+        $this->_group = Groups::find()->where(['identifier' => $this->identifier])->one();
+        $this->name = $this->_group->name;
+        $this->description = $this->_group->description;
     }
     /**
      * Logs in a user using the provided username and password.
@@ -38,8 +40,9 @@ class ChangeGroupForm extends Model
      */
     public function changeGroup()
     {
-        if($this->validate() && $this->_group=Groups::find()->where(['name' => $this->name])->one())
+        if($this->validate() && $this->_group = Groups::find()->where(['identifier' => $this->identifier])->one())
         {
+            $this->_group->setAttribute('name',$this->name);
             $this->_group->setAttribute('description',$this->description);
             if(!$this->_group->save())
             {
@@ -58,8 +61,14 @@ class ChangeGroupForm extends Model
     public function attributeLabels()
     {
         return [
+            'identifier' => Yii::t('app', 'Identifier'),
             'name' => Yii::t('app', 'Name'),
             'description' => Yii::t('app', 'Description'),
         ];
     }
+
+    public function getGroup() {
+        return $this->_group;
+    }
+
 }

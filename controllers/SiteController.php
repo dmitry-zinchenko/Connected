@@ -64,21 +64,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if(!Yii::$app->user->isGuest) {
-
-        } else {
-
+            $this->redirect(['dashboard/']);
         }
         return $this->render('index');
     }
 
     public function actionSignin()
     {
-        $this->layout = 'register';
-
-        $pass = "";
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if(!Yii::$app->user->isGuest) {
+            $this->redirect(['dashboard/']);
         }
+
+        $this->layout = 'register';
 
         $model = new LoginForm();
         if ($model->load(\Yii::$app->request->post()) && $model->login()) {
@@ -101,11 +98,11 @@ class SiteController extends Controller
 
     public function actionSignup()
     {
-        $this->layout = 'register';
-
-        if(!\Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if(!Yii::$app->user->isGuest) {
+            $this->redirect(['dashboard/']);
         }
+
+        $this->layout = 'register';
        
         $model = new RegisterForm();
         if ($model->load(\Yii::$app->request->post()) && $model->register())

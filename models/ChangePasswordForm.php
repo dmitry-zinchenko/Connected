@@ -25,9 +25,27 @@ class changePasswordForm extends Model
     {
         return [
             [['old_password', 'new_password','repeat_password'], 'required'],
-            [['old_password', 'password', 'repeat_password'], 'string', 'max' => 64],
-            ['repeat_password', 'compare', 'compareAttribute' => 'new_password', 'message' => Yii::t('app', 'Passwords don\'t match')]
+            [['old_password', 'new_password', 'repeat_password'], 'string', 'max' => 64],
+            ['repeat_password', 'compare', 'compareAttribute' => 'new_password', 'message' => Yii::t('app', 'Passwords don\'t match')],
+            ['old_password', 'validatePassword'],
         ];
+    }
+
+    /**
+     * Validates the old_password.
+     * This method serves as the inline validation for old_password.
+     *
+     * @param string $attribute the attribute currently being validated
+     * @param array $params the additional name-value pairs given in the rule
+     */
+    public function validatePassword($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = $this->getUser();
+            if (!$user || !$user->validatePassword($this->old_password)) {
+                $this->addError($attribute, 'Incorrect password.');
+            }
+        }
     }
 
     /**
@@ -37,7 +55,7 @@ class changePasswordForm extends Model
 
     public function updateProfile()
     {
-        if ($this->_user && $this->user->validatePassword($this->old_password))
+        if ($this->_user && $this->validate())
         {
             $this->_user->setPassword($this['new_password']);
             if(!$this->_user->save()) {
@@ -54,7 +72,7 @@ class changePasswordForm extends Model
 
     public function setUser($id)
     {
-        $this->_user=Users::findOne($id);
+        $this->_user = Users::findOne($id);
     }
 
     public function getUser()
@@ -66,9 +84,9 @@ class changePasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'old_password' => Yii::t('app', 'Old Password'),
-            'repeat_password' => Yii::t('app', 'Repeat Password'),
-            'new_password' => Yii::t('app', 'New Password')
+            'old_password' => Yii::t('app', 'Old password'),
+            'repeat_password' => Yii::t('app', 'Repeat password'),
+            'new_password' => Yii::t('app', 'New password')
         ];
     }
 }

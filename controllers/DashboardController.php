@@ -14,18 +14,16 @@ use yii\filters\VerbFilter;
 use app\models\Users;
 class DashboardController extends \yii\web\Controller
 {
-//    public function beforeAction($action)
-//    {
-//        if (parent::beforeAction($action)) {
-//            if (!\Yii::$app->user->can($action->id)) {
-//                throw new ForbiddenHttpException('Access denied '.$action->id.' for '.\Yii::$app->user->id);
-//
-//            }
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    public $layout = 'dashboard';
+
+    public function beforeAction($action)
+    {
+        if(\Yii::$app->user->isGuest) {
+            $this->redirect('/');
+        }
+
+        return parent::beforeAction($action) ? true : false;
+    }
 
     public function actionAccountSettings()
     {
@@ -33,19 +31,20 @@ class DashboardController extends \yii\web\Controller
         $modelAccount->setUser(\Yii::$app->user->getId());
         if($modelAccount->load(\Yii::$app->request->post()) && $modelAccount->updateProfile())
         {
-            return $this->redirect(['dashboard/index']);
+            return $this->redirect(['dashboard/']);
         }
 
         $modelPassword = new changePasswordForm();
         $modelPassword->setUser(\Yii::$app->user->getId());
         if($modelPassword->load(\Yii::$app->request->post()) && $modelPassword->updateProfile())
         {
-            return $this->redirect(['dashboard/index']);
+            return $this->redirect(['dashboard/']);
         }
 
-        return $this->render('account-settings',[
-        'modelAccount' => $modelAccount,
-        'modelPassword' => $modelPassword]);
+        return $this->render('account-settings', [
+            'modelAccount' => $modelAccount,
+            'modelPassword' => $modelPassword
+        ]);
     }
 
     public function actionCreateGroup()
@@ -58,67 +57,56 @@ class DashboardController extends \yii\web\Controller
         return $this->render('create-group',['model' => $model]);
     }
 
-    public function actionGroupSettings()
+    public function actionGroupSettings($identifier)
     {
         $model = new ChangeGroupForm();
-        $model->setParams();
+        $model->setParams($identifier);
         if($model->load(\Yii::$app->request->post()) && $model->changeGroup())
         {
             return $this->redirect(['dashboard/index']);
         }
-        $name = \Yii::$app->request->get('name');
-        $group = Groups::find()->where(['name' =>$name] )->one();
-        $disable = (!$group['disabled']) ? 'Disable' : 'Enable';
+        $group = Groups::find()->where(['identifier' => $identifier] )->one();
+        $disabled = $group['disabled'] ? true : false;
 
 
         return $this->render('group-settings',[
             'model' => $model,
-            'disable' => $disable,
-            'name' => $name
+            'disabled' => $disabled,
+            'identifier' => $identifier
         ]);
     }
 
     public function actionIndex()
     {
-        $this->layout = 'dashboard';
-        return $this->render('index');
+        $user = \Yii::$app->user->identity;
+        $myGroups = $user->getOwnGroups();
+        $participating = $user->getParticipatingGroups();
+        $disabledGroups = $user->getDisabledGroups();
+        return $this->render('index', [
+            'myGroups' => $myGroups,
+            'participating' => $participating,
+            'disabledGroups' => $disabledGroups,
+        ]);
     }
 
-    public function actionSignOut()
+    public function actionDisable($identifier)
     {
-        if(!\Yii::$app->user->logout()) {
-            return $this->render('sign-out');
-        }
-        return $this->redirect(['site/index']);
-    }
-
-    public function actionDisable()
-    {
-
-        $name = \Yii::$app->request->get('name');
-        if($group=Groups::find()->where(['name' => $name])->one()) {
-
+        if($group = Groups::find()->where(['identifier' => $identifier])->one()) {
             if ($group['disabled']) {
-
-                $group->setAttribute('disabled', false);
+                $group->setAttribute('disabled', 0);
             } else {
-                $group->setAttribute('disabled', true);
+                $group->setAttribute('disabled', 1);
 
             }
-            if ($group->save()) {
-                return $this->redirect(['dashboard/index']);
-
-            }
+            $group->save();
         }
-        return $this->redirect(['dashboard/group-settings?name='.$name]);
+        return $this->redirect(['dashboard/group-settings?identifier=' . $identifier]);
 
     }
 
-    public function actionDelete()
+    public function actionDelete($identifier)
     {
-
-        $name = \Yii::$app->request->get('name');
-        if($group=Groups::find()->where(['name' => $name])->one()) {
+        if($group=Groups::find()->where(['identifier' => $identifier])->one()) {
 
             if ($group->delete()) {
                 return $this->redirect(['dashboard/index']);
@@ -126,7 +114,7 @@ class DashboardController extends \yii\web\Controller
             }
         }
 
-        return $this->redirect(['dashboard/group-settings?name='.$name]);
+        return $this->redirect(['dashboard/group-settings?name=' . $identifier]);
 
     }
 
