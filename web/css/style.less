@@ -682,7 +682,6 @@ a:hover, a:active {
 .group-block {
   position: relative;
   display: inline-block;
-  margin-right: 20px;
   margin-bottom: 20px;
   padding: 20px;
   width: 250px;
@@ -756,6 +755,22 @@ a:hover, a:active {
   padding-bottom: 50px;
 }
 
+@media (max-width: 583px) {
+  .groups-list {
+    text-align: center;
+  }
+  .group-block {
+    display: block;
+    margin: 0 auto 20px;
+  }
+}
+
+@media (min-width: 584px) {
+  .group-block {
+    margin-right: 20px;
+  }
+}
+
 @media (max-width: 767px) {
   .content-dash {
     padding: 0 20px;
@@ -763,9 +778,6 @@ a:hover, a:active {
       font-size: 28px;
       text-align: center;
     }
-  }
-  .groups-list {
-    text-align: center;
   }
   .form-dash {
     width: 100%;

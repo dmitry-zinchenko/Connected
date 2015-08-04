@@ -25,8 +25,10 @@ class CreateGroupForm extends Model
         return [
             [['name', 'identifier'], 'required'],
             [['name'], 'string', 'max' => 64],
-            [['identifier'], 'string', 'max' => 50],
+            [['identifier'], 'string', 'min' => 3, 'max' => 50],
             [['description'], 'string', 'max' => 255],
+//            ['identifier', 'match', 'pattern' => "/[a-z0-9]$/"],
+
         ];
     }
 

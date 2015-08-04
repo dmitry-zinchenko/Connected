@@ -40,6 +40,7 @@ return [
     'Create new group' => 'Создать новую группу',
     'Open' => 'Открыть',
     'You are not a member of any group.' => 'Вы не состоите ни в одной группе.',
+    'Nothing to show.' => 'Ничего нет.',
 
     'Group name' => 'Название группы',
     'Description' => 'Описание',
