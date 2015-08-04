@@ -12,6 +12,11 @@ use yii\web;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 use app\models\Users;
+use app\models\Notices;
+use app\models\Messages;
+use app\models\Comments;
+use app\models\UserGroups;
+
 class DashboardController extends \yii\web\Controller
 {
     public $layout = 'dashboard';
@@ -108,13 +113,20 @@ class DashboardController extends \yii\web\Controller
     {
         if($group=Groups::find()->where(['identifier' => $identifier])->one()) {
 
-            if ($group->delete()) {
-                return $this->redirect(['dashboard/index']);
-
+            $notices = Notices::find()->where(['group_id' => $group->id])->all();
+            foreach ($notices as $notice) {
+                Comments::deleteAll('notice_id = :id', [':id' => $notice->id]);
+                $notice->delete();
             }
+
+            Messages::deleteAll('group_id = :id', [':id' => $group->id]);
+            UserGroups::deleteAll('group_id = :id', [':id' => $group->id]);
+            $group->delete();
+
+            return $this->redirect(['dashboard/index']);
         }
 
-        return $this->redirect(['dashboard/group-settings?name=' . $identifier]);
+        return $this->redirect(['dashboard/group-settings?identifier=' . $identifier]);
 
     }
 
