@@ -2,10 +2,11 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notices */
+/* @var $model_comments app\models\Comments */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Notices'), 'url' => ['index']];
@@ -36,14 +37,46 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
             'text:ntext',
             'create_at',
-            //'group_id',
             'author.first_name',
-           /* [
-                'label' => 'Author',
-                'value' => $model->author->first_name,
-            ], */
-            //'author_id',
         ],
+    ]) ?>
+
+</div>
+
+<div class="comments">
+
+    <h4><?= Html::encode('Comments') ?></h4>
+
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'text:ntext',
+            'author.first_name',
+            'created_at',
+            ['class' => 'yii\grid\ActionColumn',
+                'buttons'=>[
+
+                    'delete' => function ($url, $model, $key) {
+                        return Html::a(Yii::t('app', 'Delete'), ['deletecomment', 'id_comment' => $key], [
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this comment?'),
+                                'method' => 'post',
+                            ]
+                        ]);
+                    }
+
+                ],
+            ],
+        ],
+    ]);
+
+    ?>
+
+    <?=
+    $this->render('_comments', [
+        'model_comments' => $model_comments,
     ]) ?>
 
 </div>
