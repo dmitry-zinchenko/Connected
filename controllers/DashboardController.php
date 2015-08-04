@@ -14,18 +14,18 @@ use yii\filters\VerbFilter;
 use app\models\Users;
 class DashboardController extends \yii\web\Controller
 {
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            if (!\Yii::$app->user->can($action->id)) {
-                throw new ForbiddenHttpException('Access denied '.$action->id.' for '.\Yii::$app->user->id);
-
-            }
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public function beforeAction($action)
+//    {
+//        if (parent::beforeAction($action)) {
+//            if (!\Yii::$app->user->can($action->id)) {
+//                throw new ForbiddenHttpException('Access denied '.$action->id.' for '.\Yii::$app->user->id);
+//
+//            }
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public function actionAccountSettings()
     {

@@ -197,4 +197,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         $this->last_name=$str;
     }
+
+    public function setLanguage($str)
+    {
+        $this->language=$str;
+    }
 }
