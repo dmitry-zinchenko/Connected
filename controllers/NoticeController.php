@@ -110,11 +110,7 @@ class NoticeController extends Controller
      */
     public function actionDelete($id)
     {
-        $comments = Comments::find()->where(['notice_id' => $id])->all();
-        foreach ($comments as $comment)
-        {
-            $comment->delete();
-        }
+        Comments::deleteAll ('notice_id = :id', [':id' => $id]);
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -199,6 +199,11 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->last_name=$str;
     }
 
+    public function setLanguage($str)
+    {
+        $this->language=$str;
+    }
+
     public function getOwnGroups() {
         return $this->hasMany(Groups::className(), ['owner_id' => 'id'])->where(['disabled' => 0])->all();
     }
