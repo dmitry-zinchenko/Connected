@@ -38,9 +38,18 @@ class WordNotices extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'word_id' => 'Word ID',
-            'notice_id' => 'Notice ID',
+            'id' => Yii::t('app', 'ID'),
+            'word_id' => Yii::t('app', 'Word ID'),
+            'notice_id' => Yii::t('app', 'Notice ID'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return WordNoticesQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new WordNoticesQuery(get_called_class());
     }
 }

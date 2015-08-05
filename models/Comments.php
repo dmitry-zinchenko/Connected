@@ -3,9 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\db\Expression;
 
 /**
  * This is the model class for table "comments".
@@ -32,27 +29,10 @@ class Comments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['text'], 'required'],
+            [['author_id', 'text', 'notice_id', 'created_at'], 'required'],
             [['author_id', 'notice_id'], 'integer'],
             [['text'], 'string'],
             [['created_at'], 'safe']
-        ];
-    }
-
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => false,
-                'value' => new Expression('NOW()'),
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'author_id',
-                'updatedByAttribute' => false,
-            ]
         ];
     }
 
@@ -62,16 +42,20 @@ class Comments extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'author_id' => 'Author ID',
-            'text' => 'Text',
-            'notice_id' => 'Notice ID',
-            'created_at' => 'Created At',
+            'id' => Yii::t('app', 'ID'),
+            'author_id' => Yii::t('app', 'Author ID'),
+            'text' => Yii::t('app', 'Text'),
+            'notice_id' => Yii::t('app', 'Notice ID'),
+            'created_at' => Yii::t('app', 'Created At'),
         ];
     }
 
-    public function getAuthor()
+    /**
+     * @inheritdoc
+     * @return CommentsQuery the active query used by this AR class.
+     */
+    public static function find()
     {
-        return $this->hasOne(Users::className(), ['id' => 'author_id']);
+        return new CommentsQuery(get_called_class());
     }
 }

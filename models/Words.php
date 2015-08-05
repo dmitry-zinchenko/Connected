@@ -37,8 +37,17 @@ class Words extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
+            'id' => Yii::t('app', 'ID'),
+            'name' => Yii::t('app', 'Name'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return WordsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new WordsQuery(get_called_class());
     }
 }
