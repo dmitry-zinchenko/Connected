@@ -49,8 +49,13 @@ class RbacController extends Controller
         $deletePost->description = 'Drop User';
         $auth->add($dropUser);
 
+        // add the rule
+        $rule = new \app\rbac\ownerRule;
+        $auth->add($rule);
+
         $changeGroup=$auth->createPermission('changeGroup');
         $changeGroup->description='Change Group';
+        $changeGroup->ruleName = $rule->name;
         $auth->add($changeGroup);
 
         $grantAuthor=$auth->createPermission('granAuthor');

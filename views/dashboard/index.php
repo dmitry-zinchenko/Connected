@@ -15,9 +15,9 @@ $this->title = Yii::t('app', 'Dashboard');
                 <a class="group-settings" href="<?= Url::to([ 'group-settings', 'identifier' => $group->identifier ]) ?>"></a>
                 <h3><?= Html::encode($group->name) ?></h3>
                 <p class="group-description"><?= Html::encode($group->description) ?></p>
-                <a href="<?= Url::to(["workspace/$group->identifier"]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
+                <a href="<?= Url::to(["workspace/".$group->identifier]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
             </div>
-        <? endif; ?>
+        <?php endif; ?>
     <?php endforeach; ?>
 
     <a class="group-block group-add" href="<?= Url::to(['create-group']) ?>"></a>
