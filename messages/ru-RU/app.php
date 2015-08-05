@@ -64,8 +64,8 @@ return [
     'Role' => 'Роль',
     'Actions' => 'Действия',
     'Drop' => 'Исключить',
-    'User does not exists.' => 'Пользователь не существует',
-    'This user has already been added.' => 'Этот пользователь уже является участником группы',
+    'User does not exists.' => 'Такого пользователя не существует.',
+    'This user has already been added.' => 'Этот пользователь уже является участником группы.',
     'Add member' => 'Добавить участника',
     'Will be available soon' => 'Будет доступно скоро',
 
