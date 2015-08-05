@@ -63,7 +63,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'=>[
 
                     'delete' => function ($url, $model, $key) {
-                        return Html::a(Yii::t('app', 'Delete'),  Url::to(['notice/deletecomment', 'id_comment' => $key, 'group_identifier' => Groups::findOne(Notices::findOne($model->notice_id)->group_id)->identifier]), [
+                        return Html::a(Yii::t('app', 'Delete'),  Url::to(['notice/deletecomment', 'id_comment' => $key,
+                            'group_identifier' => Groups::findOne(Notices::findOne($model->notice_id)->group_id)->identifier]), [
                             'data' => [
                                 'confirm' => Yii::t('app', 'Are you sure you want to delete this comment?'),
                                 'method' => 'post',

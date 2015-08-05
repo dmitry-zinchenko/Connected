@@ -10,6 +10,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use app\models\Groups;
 use yii\helpers\Url;
+use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 /**
  * NoticeController implements the CRUD actions for Notices model.
@@ -32,16 +33,22 @@ class NoticeController extends Controller
 
     public function actionIndex()
     {
-        $query = Notices::find()->where(['group_id' => $this->group->id])->all();
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => $query,
-            'key' => 'id',
-        ]);
+        if(!\Yii::$app->user->isGuest) {
+            $query = Notices::find()->where(['group_id' => $this->group->id])->all();
+            $dataProvider = new ArrayDataProvider([
+                'allModels' => $query,
+                'key' => 'id',
+            ]);
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'group' => $this->group,
-        ]);
+            return $this->render('index', [
+                'dataProvider' => $dataProvider,
+                'group' => $this->group,
+            ]);
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
+        }
     }
 
     /**
@@ -51,24 +58,31 @@ class NoticeController extends Controller
      */
     public function actionView($id)
     {
-        $model_comments = new Comments();
+        if(\Yii::$app->user->can('AccessGroup',['group'=>$this->group]))
+        {
+            $model_comments = new Comments();
+            if ($model_comments->load(Yii::$app->request->post())) {
+                if ($model_comments->save()) {
+                    $this->redirect(Url::toRoute(['notice/view', 'id' => $id, 'group_identifier' => $this->group->identifier]));
+                }
+            }
+            $model_comments->notice_id = $id;
 
-         if($model_comments->load(Yii::$app->request->post()) && $model_comments->save())
-             $this->redirect(Url::toRoute(['notice/view', 'id' => $id, 'group_identifier' => $this->group->identifier]));
+            $dataProvider = new ActiveDataProvider([
+                'query' => Comments::find()->where(['notice_id' => $id]),
+                'key' => 'id',
+            ]);
 
-        $model_comments->notice_id = $id;
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => Comments::find()->where(['notice_id' => $id]),
-            'key' => 'id',
-        ]);
-
-        return $this->render('view', [
-            'model_comments' => $model_comments,
-            'dataProvider' => $dataProvider,
-            'model' => $this->findModel($id),
-            'group' => $this->group,
-        ]);
+            return $this->render('view', [
+                'model_comments' => $model_comments,
+                'dataProvider' => $dataProvider,
+                'model' => $this->findModel($id),
+                'group' => $this->group,
+            ]);
+        }
+        else{
+            throw new ForbiddenHttpException('Access denied');
+        }
     }
 
     /**
@@ -78,21 +92,26 @@ class NoticeController extends Controller
      */
     public function actionCreate()
     {
+        if(\Yii::$app->user->can('createPost')) {
+            $model = new Notices();
 
-        $model = new Notices();
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'group_identifier' => $this->group->identifier]);
 
-            return $this->redirect(['view', 'id' => $model->id, 'group_identifier' => $this->group->identifier]);
+            } else {
+                $model->group_id = $this->group->id;
 
-        } else {
-            $model->group_id = $this->group->id;
-
-            return $this->render('create', [
-                'model' => $model,
-                'group' => $this->group
-            ]);
+                return $this->render('create', [
+                    'model' => $model,
+                    'group' => $this->group
+                ]);
+            }
         }
+       else
+       {
+           throw new ForbiddenHttpException('Access denied');
+       }
     }
 
     /**
@@ -103,17 +122,23 @@ class NoticeController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(\Yii::$app->user->can('updateOwnPost',['updatePost'=>$this->findModel($id)])) {
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
-            return $this->redirect(['view', 'id' => $model->id, 'group_identifier' => $this->group->identifier]);
+                return $this->redirect(['view', 'id' => $model->id, 'group_identifier' => $this->group->identifier]);
 
-        } else {
+            } else {
 
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
         }
     }
 
@@ -125,10 +150,16 @@ class NoticeController extends Controller
      */
     public function actionDelete($id)
     {
-        Comments::deleteAll ('notice_id = :id', [':id' => $id]);
-        $this->findModel($id)->delete();
+        if(\Yii::$app->user->can('deletePost')) {
+            Comments::deleteAll('notice_id = :id', [':id' => $id]);
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index', 'group_identifier' => $this->group->identifier]);
+            return $this->redirect(['index', 'group_identifier' => $this->group->identifier]);
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
+        }
     }
 
     public function actionDeletecomment($id_comment)

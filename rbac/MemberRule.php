@@ -2,19 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: user
- * Date: 7/29/15
- * Time: 1:21 PM
+ * Date: 8/5/15
+ * Time: 5:11 PM
  */
 namespace app\rbac;
 
 use yii\rbac\Rule;
 use app\models\Users;
+use app\models\Groups;
+use app\models\UserGroups;
 /**
  * Checks if authorID matches user passed via params
  */
-class OwnerRule extends Rule
+class MemberRule extends Rule
 {
-    public $name = 'isOwner';
+    public $name = 'isMember';
 
     /**
      * @param string|integer $user the user ID.
@@ -24,6 +26,6 @@ class OwnerRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return isset($params['changeGroup']) ? $params['changeGroup']->attributes['owner_id'] == $user : false;
+        return isset($params['group']) ? UserGroups::find()->where(['group_id' => $params['group']->attributes['id'],'user_id' => $user])->one() : false;
     }
 }

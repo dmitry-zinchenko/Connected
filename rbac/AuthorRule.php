@@ -8,7 +8,7 @@
 namespace app\rbac;
 
 use yii\rbac\Rule;
-
+use app\models\Notices;
 /**
  * Checks if authorID matches user passed via params
  */
@@ -24,6 +24,6 @@ class AuthorRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        return isset($params['updatePost']) ? $params['updatePost']->createdBy == $user : false;
+        return isset($params['updatePost']) ? $params['updatePost']->attributes['author_id'] == $user : false;
     }
 }

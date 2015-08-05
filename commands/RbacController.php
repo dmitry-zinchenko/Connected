@@ -50,7 +50,7 @@ class RbacController extends Controller
         $auth->add($dropUser);
 
         // add the rule
-        $rule = new \app\rbac\ownerRule;
+        $rule = new \app\rbac\OwnerRule;
         $auth->add($rule);
 
         $changeGroup=$auth->createPermission('changeGroup');
@@ -71,6 +71,16 @@ class RbacController extends Controller
         $auth->add($inviteUser);
 
 
+        // add the rule
+        $rule = new \app\rbac\MemberRule;
+        $auth->add($rule);
+
+        // add the "updateOwnPost" permission and associate the rule with it.
+        $member = $auth->createPermission('AccessGroup');
+        $member->description = 'Access to group';
+        $member->ruleName = $rule->name;
+        $auth->add($member);
+
 
         // add "author" role and give this role the "createPost" permission
         $user = $auth->createRole('user');
@@ -79,6 +89,7 @@ class RbacController extends Controller
         $auth->addChild($user, $chat);
         $auth->addChild($user, $index);
         $auth->addChild($user, $leaveComment);
+        $auth->addChild($user, $member);
 
 
         // add "author" role and give this role the "createPost" permission
@@ -90,7 +101,7 @@ class RbacController extends Controller
         $auth->addChild($author, $user);
 
         // add the rule
-        $rule = new \app\rbac\authorRule;
+        $rule = new \app\rbac\AuthorRule;
         $auth->add($rule);
 
         // add the "updateOwnPost" permission and associate the rule with it.
@@ -98,6 +109,9 @@ class RbacController extends Controller
         $updateOwnPost->description = 'Update own post';
         $updateOwnPost->ruleName = $rule->name;
         $auth->add($updateOwnPost);
+
+
+
 
         // "updateOwnPost" will be used from "updatePost"
         $auth->addChild($updateOwnPost, $updatePost);

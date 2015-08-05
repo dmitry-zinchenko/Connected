@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\behaviors\BlameableBehavior;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "notices".
@@ -16,6 +20,7 @@ use Yii;
  */
 class Notices extends \yii\db\ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -38,27 +43,42 @@ class Notices extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_at',
+                'updatedAtAttribute' => false,
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'author_id',
+                'updatedByAttribute' => false,
+            ]
+        ];
+    }
+
     /**
      * @inheritdoc
      */
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'title' => Yii::t('app', 'Title'),
-            'text' => Yii::t('app', 'Text'),
-            'create_at' => Yii::t('app', 'Create At'),
-            'group_id' => Yii::t('app', 'Group ID'),
-            'author_id' => Yii::t('app', 'Author ID'),
+            'id' => 'ID',
+            'title' => 'Title',
+            'text' => 'Text',
+            'create_at' => 'Create At',
+            'group_id' => 'Group ID',
+            'author_id' => 'Author ID',
         ];
     }
 
-    /**
-     * @inheritdoc
-     * @return NoticesQuery the active query used by this AR class.
-     */
-    public static function find()
+    public function getAuthor()
     {
-        return new NoticesQuery(get_called_class());
+
+        return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
+
 }
