@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'text')->textarea(['rows' => 6, 'placeholder' => 'Enter your message here']) ?>
 
+    <?= $form->field($model, 'group_id')->hiddenInput()->label(false) ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Send message'), ['class' => 'btn btn-success']) ?>
     </div>
