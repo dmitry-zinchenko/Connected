@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\helpers\Url;
+use app\models\Groups;
 use yii\filters\VerbFilter;
 
 /**
@@ -15,16 +16,28 @@ use yii\filters\VerbFilter;
  */
 class MessageController extends Controller
 {
-    public function actionIndex($group_id)
+
+    private $group;
+    public function beforeAction($action)
     {
+        if (parent::beforeAction($action)) {
+            $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('group_identifier')])->one();
+            return true;
+        }
+        return false;
+    }
+
+    public function actionIndex()
+    {
+
         $model = new Messages();
-        if($model->load(Yii::$app->request->post()) && $model->save()) $this->redirect(Url::toRoute(['message/index', 'group_id' => $group_id]));
+        if($model->load(Yii::$app->request->post()) && $model->save()) $this->redirect(Url::toRoute(['message/index', 'group_identifier' => $this->group->identifier]));
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Messages::find()->where(['group_id' => $group_id]),
+            'query' => Messages::find()->where(['group_id' => $this->group->id]),
         ]);
 
-
+        $model->group_id = $this->group->id;
         return $this->render('index', [
             'dataProvider' => $dataProvider,
             'model' => $model,

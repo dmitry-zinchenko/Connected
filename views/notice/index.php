@@ -35,24 +35,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 'buttons'=>[
                     'view' => function ($url, $model, $key) {
-                        return Html::a(Yii::t('app', 'View'), $url/*['view', 'id' => $model->id, 'group_identifier' => ]*/);
+                        return Html::a(Yii::t('app', 'View'), Url::to(['notice/view', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
 
                         },
 
-                   /* 'update' => function ($url, $model, $group) {
-                        return Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id, 'group_identifier' => $group->identifier]);
+                    'update' => function ($url, $model, $group) {
+                        return Html::a(Yii::t('app', 'Update'), Url::to(['notice/update', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
 
                     },
 
                     'delete' => function ($url, $model, $group) {
-                        return Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id, 'group_identifier' => $group->identifier], [
+                        return Html::a(Yii::t('app', 'Delete'), Url::to(['notice/delete', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]), [
                             //'class' => 'btn btn-danger',
                             'data' => [
                                 'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                 'method' => 'post',
                             ]
                         ]);
-                    } */
+                    }
                 ],
             ],
         ],

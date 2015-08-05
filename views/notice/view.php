@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use app\models\Groups;
+use app\models\Notices;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Notices */
@@ -61,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons'=>[
 
                     'delete' => function ($url, $model, $key) {
-                        return Html::a(Yii::t('app', 'Delete'), ['deletecomment', 'id_comment' => $key], [
+                        return Html::a(Yii::t('app', 'Delete'),  Url::to(['notice/deletecomment', 'id_comment' => $key, 'group_identifier' => Groups::findOne(Notices::findOne($model->notice_id)->group_id)->identifier]), [
                             'data' => [
                                 'confirm' => Yii::t('app', 'Are you sure you want to delete this comment?'),
                                 'method' => 'post',

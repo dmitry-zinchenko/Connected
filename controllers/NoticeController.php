@@ -27,7 +27,7 @@ class NoticeController extends Controller
             $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('group_identifier')])->one();
             return true;
         }
-        else {return false;}
+        return false;
     }
 
     public function actionIndex()
@@ -54,7 +54,7 @@ class NoticeController extends Controller
         $model_comments = new Comments();
 
          if($model_comments->load(Yii::$app->request->post()) && $model_comments->save())
-             $this->redirect(Url::toRoute(['notice/view', 'id' => $id]));
+             $this->redirect(Url::toRoute(['notice/view', 'id' => $id, 'group_identifier' => $this->group->identifier]));
 
         $model_comments->notice_id = $id;
 
@@ -139,7 +139,7 @@ class NoticeController extends Controller
 
         $comment->delete();
 
-        return $this->redirect(['view', 'id' => $notice_id]);
+        return $this->redirect(Url::toRoute(['notice/view', 'id' => $notice_id, 'group_identifier' => $this->group->identifier]));
     }
 
     /**
