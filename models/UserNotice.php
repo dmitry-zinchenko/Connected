@@ -38,9 +38,18 @@ class UserNotice extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'notice_id' => 'Notice ID',
-            'user_at' => 'User At',
+            'id' => Yii::t('app', 'ID'),
+            'notice_id' => Yii::t('app', 'Notice ID'),
+            'user_at' => Yii::t('app', 'User At'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return UserNoticeQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserNoticeQuery(get_called_class());
     }
 }

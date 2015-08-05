@@ -3,11 +3,11 @@
 namespace app\models;
 
 /**
- * This is the ActiveQuery class for [[Users]].
+ * This is the ActiveQuery class for [[Messages]].
  *
- * @see Users
+ * @see Messages
  */
-class UsersQuery extends \yii\db\ActiveQuery
+class MessagesQuery extends \yii\db\ActiveQuery
 {
     /*public function active()
     {
@@ -17,15 +17,8 @@ class UsersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Users[]|array
+     * @return Messages[]|array
      */
-     public function byPk($itemId)
-    {
-        $this->andWhere('id=:itemId')
-            ->addParams([':itemId' => $itemId]);
-        return $this;
-    }
-     
     public function all($db = null)
     {
         return parent::all($db);
@@ -33,7 +26,7 @@ class UsersQuery extends \yii\db\ActiveQuery
 
     /**
      * @inheritdoc
-     * @return Users|array|null
+     * @return Messages|array|null
      */
     public function one($db = null)
     {

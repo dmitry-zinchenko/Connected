@@ -39,10 +39,19 @@ class UserGroups extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'group_id' => 'Group ID',
-            'role_id' => 'Role ID',
+            'id' => Yii::t('app', 'ID'),
+            'user_id' => Yii::t('app', 'User ID'),
+            'group_id' => Yii::t('app', 'Group ID'),
+            'role_id' => Yii::t('app', 'Role ID'),
         ];
+    }
+
+    /**
+     * @inheritdoc
+     * @return UserGroupsQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new UserGroupsQuery(get_called_class());
     }
 }
