@@ -27,4 +27,8 @@ $(document).ready(function() {
             scrollTop: scrollTop,
         }), 1500
     });
+
+    $('#delete-confirmation').on('click', function() {
+        return confirm('This can not be undone, really. Are you sure?');
+    })
 });
