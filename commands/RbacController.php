@@ -50,7 +50,7 @@ class RbacController extends Controller
         $auth->add($dropUser);
 
         // add the rule
-        $rule = new \app\rbac\ownerRule;
+        $rule = new \app\rbac\OwnerRule;
         $auth->add($rule);
 
         $changeGroup=$auth->createPermission('changeGroup');

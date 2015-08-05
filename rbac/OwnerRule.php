@@ -24,7 +24,6 @@ class OwnerRule extends Rule
      */
     public function execute($user, $item, $params)
     {
-        //var_dump($params); die();
         return isset($params['changeGroup']) ? $params['changeGroup']->attributes['owner_id'] == $user : false;
     }
 }
