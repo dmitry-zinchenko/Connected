@@ -29,6 +29,7 @@ class Comments extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    //new
     public function rules()
     {
         return [

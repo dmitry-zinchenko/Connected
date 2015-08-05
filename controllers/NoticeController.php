@@ -52,10 +52,11 @@ class NoticeController extends Controller
     public function actionView($id)
     {
         $model_comments = new Comments();
-
-         if($model_comments->load(Yii::$app->request->post()) && $model_comments->save())
-             $this->redirect(Url::toRoute(['notice/view', 'id' => $id, 'group_identifier' => $this->group->identifier]));
-
+        if ($model_comments->load(Yii::$app->request->post())) {
+            if($model_comments->save()) {
+                $this->redirect(Url::toRoute(['notice/view', 'id' => $id, 'group_identifier' => $this->group->identifier]));
+            }
+        }
         $model_comments->notice_id = $id;
 
         $dataProvider = new ActiveDataProvider([
