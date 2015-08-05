@@ -77,6 +77,7 @@ class Notices extends \yii\db\ActiveRecord
 
     public function getAuthor()
     {
+
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
 
