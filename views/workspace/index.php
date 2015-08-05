@@ -1,5 +1,8 @@
 <?php
 /* @var $this yii\web\View */
+
+Yii::$app->view->params['group'] = $group;
+Yii::$app->view->params['members'] = $group->getMembersWithOwner();
 ?>
 <h1>workspace/index</h1>
 

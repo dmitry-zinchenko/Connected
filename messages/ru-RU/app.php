@@ -117,4 +117,7 @@ return [
     'Search results' => 'Результаты поиска',
     'Search results for tag "{tag}"' => 'Результаты поиска по тегу "{tag}"',
     'Nothing\'s found...' => 'Ничего не найдено...',
+
+    'Back to dashboard' => 'Вернуться в панель управления',
+    'There is no group with identifier {id}' => 'Группы с идентификатором {id} не существует',
 ];

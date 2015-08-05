@@ -11,6 +11,8 @@ use yii\grid\GridView;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?= json_encode($messages) ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
