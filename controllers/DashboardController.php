@@ -172,16 +172,28 @@ class DashboardController extends \yii\web\Controller
 
     public function actionDropUser($userId, $groupId, $identifier) 
     {
-        UserGroups::findByUserAndGroup($userId, $groupId)->dropUser();
-        return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+        if (\Yii::$app->user->can('dropUser')){
+            UserGroups::findByUserAndGroup($userId, $groupId)->dropUser();
+            return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
+        }
 
     }
 
     public function actionChangeRole($userId, $groupId, $roleId, $identifier) 
     {
-        $userGroup = UserGroups::findByUserAndGroup($userId, $groupId);
-        $userGroup->changeRole($roleId);
-        return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+        if (\Yii::$app->user->can('dropUser')) {
+            $userGroup = UserGroups::findByUserAndGroup($userId, $groupId);
+            $userGroup->changeRole($roleId);
+            return $this->redirect(['dashboard/group-settings', 'identifier' => $identifier]);
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
+        }
     }
 
 }
