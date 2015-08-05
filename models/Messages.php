@@ -32,6 +32,7 @@ class Messages extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+
             [['text'], 'required'],
             [['author_id', 'group_id'], 'integer'],
             [['text'], 'string'],
@@ -41,6 +42,7 @@ class Messages extends \yii\db\ActiveRecord
 
     public function behaviors()
     {
+
         return [
             [
                 'class' => TimestampBehavior::className(),
@@ -72,6 +74,7 @@ class Messages extends \yii\db\ActiveRecord
 
     public function getAuthor()
     {
+
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
     }
 }
