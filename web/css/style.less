@@ -969,13 +969,6 @@ a.btn:visited {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  .scroll-bar {
-    opacity: 0;
-    .transition(opacity);
-  }
-  &:hover .scroll-bar {
-    opacity: 1;
-  }
   h3 {
     margin-top: 0;
     font-size: 20px;
@@ -986,6 +979,16 @@ a.btn:visited {
   margin: 10px 0;
   width: 100%;
   height: 46%;
+  .scroll-bar {
+    opacity: 0;
+    .transition(opacity);
+  }
+  &:hover .scroll-bar {
+    opacity: 1;
+  }
+}
+
+.members-list, .group-chat {
 }
 
 .members-list {

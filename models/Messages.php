@@ -18,6 +18,19 @@ use yii\db\Expression;
  */
 class Messages extends \yii\db\ActiveRecord
 {
+    public function __construct(
+        $authorId = null,
+        $text = null,
+        $createdAt = null,
+        $groupId = null)
+    {
+        parent::__construct();
+        $this->author_id = $authorId;
+        $this->text = $text;
+        $this->created_at = $createdAt;
+        $this->group_id = $groupId;
+    }
+
     /**
      * @inheritdoc
      */
@@ -38,23 +51,24 @@ class Messages extends \yii\db\ActiveRecord
             [['created_at'], 'safe']
         ];
     }
-
-    public function behaviors()
-    {
-        return [
-            [
-                'class' => TimestampBehavior::className(),
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => false,
-                'value' => new Expression('NOW()'),
-            ],
-            [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'author_id',
-                'updatedByAttribute' => false,
-            ]
-        ];
-    }
+//
+//    public function behaviors()
+//    {
+//        return [
+//            [
+//                'class' => TimestampBehavior::className(),
+//                'createdAtAttribute' => 'created_at',
+//                'updatedAtAttribute' => false,
+//                'value' => new Expression('NOW()'),
+//            ],
+//            [
+//                'class' => BlameableBehavior::className(),
+//                'createdByAttribute' => 'author_id',
+//                'updatedByAttribute' => false,
+//                'value' => \Yii::$app->user->getId(),
+//            ]
+//        ];
+//    }
 
     /**
      * @inheritdoc
@@ -73,6 +87,20 @@ class Messages extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
+    }
+
+    public function create() {
+        var_dump($this->group_id);
+        if($this->author_id
+            && $this->text
+            && $this->created_at
+            && $this->group_id) {
+            if($this->save()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function find()

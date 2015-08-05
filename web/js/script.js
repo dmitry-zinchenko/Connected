@@ -127,11 +127,42 @@ $(document).ready(function() {
         wheelSpeed: 30,
     });
 
-    $(".group-chat").customScrollbar({
-        skin: "default-skin",
-        hScroll: false,
-        updateOnWindowResize: true,
-        wheelSpeed: 30,
-    });
+
 });
 
+$(document).ready(function() {
+
+    getChatMessages(
+        {
+            group: 'qweqweqwe',
+        }
+    );
+
+    function getChatMessages(params) {
+        $.ajax({
+            type: 'get',
+            url: '/message',
+            data: params,
+            cache: false,
+            response: 'json',
+            success: function(response) {
+                $.each(response.messages, function(index, value) {
+                    console.log();
+                    $('.group-chat').append(value.text + '<br>');
+                })
+                $(".group-chat").customScrollbar({
+                    skin: "default-skin",
+                    hScroll: false,
+                    updateOnWindowResize: true,
+                    wheelSpeed: 30,
+                });
+
+
+            },
+            error: function(text) {
+                alert('Caught Exception: ' + text);
+            }
+        });
+    }
+
+});

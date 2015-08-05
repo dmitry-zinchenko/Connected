@@ -101,7 +101,7 @@ $dataProvider = new ActiveDataProvider([
                 <div class="sidebar-wrap">
                     <div class="sidebar-content">
                         <h3>Members</h3>
-                        <section class="members-list">
+                        <div class="members-list">
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'tableOptions' => ['class' => 'table table-members'],
@@ -120,11 +120,11 @@ $dataProvider = new ActiveDataProvider([
                                     ],
                                 ],
                             ]) ?>
-                        </section>
+                        </div>
                         <h3>Group chat</h3>
-                        <section class="group-chat">
+                        <div class="group-chat">
 
-                        </section>
+                        </div>
                     </div>
                 </div>
             </aside>
