@@ -2,8 +2,7 @@
  * Created by Dmitry on 27.07.2015.
  */
 
-$(window).scroll(function() {
-
+function scrollActions() {
     var scrolled = $(window).scrollTop();
 
     if ((scrolled > 50) && (window.innerWidth > 767)) {
@@ -15,10 +14,15 @@ $(window).scroll(function() {
         $('.navbar-fixed-top').removeClass('scrolled');
         $('.head-image').css('top', '300px');
     }
+}
 
+$(window).scroll(function() {
+    scrollActions();
 });
 
 $(document).ready(function() {
+
+    scrollActions();
 
     $('a#learn-more').click(function(e) {
         e.preventDefault();

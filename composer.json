@@ -1,5 +1,9 @@
 {
   "require-dev": {
       "yiisoft/yii2-gii": "*"
+  },
+  "require": {
+    "kop/yii2-scroll-pager": "dev-master",
+    "yiisoft/yii2-debug": "^2.0"
   }
 }
