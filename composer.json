@@ -4,6 +4,7 @@
       "yiisoft/yii2-gii": "*"
   },
   "require": {
-    "kop/yii2-scroll-pager": "2.2.4"
+    "kop/yii2-scroll-pager": "2.2.4",
+    "yiisoft/yii2-debug": "2.0.4"
   }
 }

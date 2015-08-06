@@ -30,4 +30,13 @@ return array (
       '@kop/y2sp' => $vendorDir . '/kop/yii2-scroll-pager',
     ),
   ),
+  'yiisoft/yii2-debug' => 
+  array (
+    'name' => 'yiisoft/yii2-debug',
+    'version' => '2.0.4.0',
+    'alias' => 
+    array (
+      '@yii/debug' => $vendorDir . '/yiisoft/yii2-debug',
+    ),
+  ),
 );
