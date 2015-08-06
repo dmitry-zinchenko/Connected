@@ -19,9 +19,13 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/style.css',
+        'css/jquery.custom-scrollbar.css',
+        'css/notice.css',
     ];
     public $js = [
         'js/script.js',
+        'js/jquery.cookie.js',
+        'js/jquery.custom-scrollbar.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

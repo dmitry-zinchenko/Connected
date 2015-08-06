@@ -18,6 +18,13 @@ use yii\db\Expression;
  */
 class Messages extends \yii\db\ActiveRecord
 {
+    public function __construct($text = null, $groupId = null)
+    {
+        parent::__construct();
+        $this->text = $text;
+        $this->group_id = $groupId;
+    }
+
     /**
      * @inheritdoc
      */
@@ -73,6 +80,14 @@ class Messages extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(Users::className(), ['id' => 'author_id']);
+    }
+
+    public function create() {
+        if($this->validate() && $this->save()) {
+            return true;
+        }
+
+        return false;
     }
 
     public static function find()

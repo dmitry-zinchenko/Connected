@@ -586,8 +586,6 @@ a:hover, a:active {
 
 /* Navigation */
 .navbar-dashboard {
-  position: absolute;
-  top: 0; left: 0; right: 0;
   background: @indigo300;
   color: #fff;
   z-index: 100;
@@ -630,6 +628,11 @@ a:hover, a:active {
       background: url('../images/sprite.png') -40px -50px no-repeat;
     }
   }
+}
+
+.navbar-dashboard-abs {
+  position: absolute;
+  top: 0; left: 0; right: 0;
 }
 
 @media (min-width: 768px) {
@@ -844,3 +847,255 @@ a.btn:visited {
 /* */
 /* --- DASHBOARD */
 /* */
+
+
+/* */
+/* WORKSPACE */
+/* */
+
+.wrap-work {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: auto;
+  .navbar {
+    margin-bottom: 0;
+  }
+}
+
+
+
+.navbar {
+  .group-name {
+    line-height: 40px;
+    margin-left: 20px;
+  }
+  .container-storage {
+    float: right;
+    margin-top: 3px;
+    text-align: right;
+    .dropdown-storage-btn {
+      position: relative;
+      padding: 6px 12px 6px 32px;
+      background: @indigo100;
+      color: @text;
+      outline: none;
+      &:before {
+        content: "";
+        position: absolute;
+        top: 9px; left: 12px;
+        display: block;
+        width: 15px;
+        height: 15px;
+        background: url("../images/sprite.png") -170px -40px no-repeat;
+      }
+    }
+  }
+}
+
+.dropdown-menu-storage {
+  left: auto;
+  right: 0;
+  li a, li a:visited {
+    color: @text;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar .group-name {
+    display: none;
+  }
+  .navbar .container-storage {
+    display: none;
+  }
+  .button-sidebar-open {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-work {
+    display: none;
+  }
+  .button-sidebar-open {
+    display: block;
+  }
+}
+
+.button-sidebar-open {
+  //position: fixed;
+  //top: 90px; right: 20px;
+  float: right;
+  margin-top: 3px;
+  margin-left: 10px;
+  width: 50px;
+  height: 30px;
+  background: url("../images/sprite.png") -90px 0 no-repeat;
+  border: 1px solid transparent;
+  opacity: 0.8;
+  .transition(opacity);
+  &:hover {
+    opacity: 1;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.content-wrap {
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 62px;
+  display: block;
+  width: 240px;
+  background: @bluegray100;
+  z-index: 99;
+  .box-shadow(5px, rgba(0, 0, 0, 0.3));
+}
+
+.sidebar-wrap {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar-content {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+  }
+}
+
+.members-block {
+  width: 100%;
+  height: 40%;
+}
+.chat-block {
+  width: 100%;
+  height: 60%;
+}
+
+.members-list, .group-chat {
+  margin: 10px 0;
+  width: 100%;
+  .scroll-bar {
+    opacity: 0;
+    .transition(opacity);
+  }
+  &:hover .scroll-bar {
+    opacity: 1;
+  }
+}
+
+.members-list {
+  height: 80%;
+}
+
+.group-chat {
+  height: 70%;
+}
+
+.members-list {
+  table {
+    min-width: 210px;
+    max-width: 210px;
+    border: none;
+    font-size: 12px;
+    tr, td {
+      padding: 0 0 5px !important;
+      border: none !important;
+    }
+  }
+  .summary, .table thead  {
+    display: none;
+  }
+}
+
+.chat-send {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid @indigo100;
+  #chat-form {
+    height: 50px;
+  }
+  .chat-message-input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    font-size: 12px;
+  }
+}
+
+.message {
+  margin-bottom: 10px;
+  min-width: 210px;
+  max-width: 210px;
+  font-size: 12px;
+}
+.message-info {
+  position: relative;
+  margin-bottom: 5px;
+  .message-author {
+
+  }
+  .message-time {
+    position: absolute;
+    top: 0; right: 0;
+    color: @secondaryText;
+  }
+  .message-text {
+  }
+}
+/* --- Sidebar */
+
+.content-work {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  width: 100%;
+  h1 {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .content-work {
+    padding: 0 20px;
+    h1 {
+      font-size: 28px;
+      text-align: center;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .content-work {
+    padding: 20px 50px;
+  }
+}
+
+/* */
+/* --- WORKSPACE */
+/* */
+
+#yii-debug-toolbar-min {
+  display: none !important;
+}

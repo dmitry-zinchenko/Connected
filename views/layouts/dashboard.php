@@ -47,7 +47,7 @@ AppAsset::register($this);
         'brandLabel' => '',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar-default navbar-dashboard',
+            'class' => 'navbar-default navbar-dashboard navbar-dashboard-abs',
         ],
     ]);
     echo Nav::widget([

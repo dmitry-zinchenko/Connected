@@ -14,12 +14,46 @@ use yii\web\NotFoundHttpException;
 
 class WorkspaceController extends \yii\web\Controller
 {
-    public function actionIndex()
+    public $layout = 'workspace';
+
+    private $group;
+    public function beforeAction($action)
     {
-        $notice_index = Url::to(['notice/index','identifier'=>\Yii::$app->request->get('identifier')]);
-        return $this->render('index',[
-            'notice_index' => $notice_index
-        ]);
+        if (parent::beforeAction($action) && !empty(\Yii::$app->request->get('identifier'))){
+            $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('identifier')])->one();
+            return true;
+        }
+        return false;
+    }
+
+
+    public function actionIndex($identifier)
+    {
+        if(!\Yii::$app->user->isGuest) {
+            if($this->group) {
+                $query = Notices::find()->where(['group_id' => $this->group->id])->all();
+                $dataProvider = new ArrayDataProvider([
+                    'allModels' => $query,
+                    'key' => 'id',
+
+                ]);
+
+                return $this->render('index', [
+                    'dataProvider' => $dataProvider,
+                    'group' => $this->group,
+                ]);
+
+            } else {
+                throw new NotFoundHttpException(Yii::t('app', 'There is no group with identifier {id}', [
+                    'id' => $identifier,
+                ]));
+            }
+        }
+        else
+        {
+            throw new ForbiddenHttpException('Access denied');
+        }
+
     }
 
 }
