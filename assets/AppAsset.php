@@ -20,7 +20,6 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/style.css',
         'css/jquery.custom-scrollbar.css',
-        'css/notice.css',
         'css/comment.css',
     ];
     public $js = [
