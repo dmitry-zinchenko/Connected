@@ -15,6 +15,8 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
 use app\components\Widgets\LanguageSelectorWidget;
+use yii\web\View;
+
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -29,6 +31,8 @@ $dataProvider = new ActiveDataProvider([
         'pageSize' => false,
     ],
 ]);
+
+$this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
 
 ?>
 <?php $this->beginPage() ?>
@@ -100,30 +104,39 @@ $dataProvider = new ActiveDataProvider([
             <aside id="group-members" class="sidebar">
                 <div class="sidebar-wrap">
                     <div class="sidebar-content">
-                        <h3>Members</h3>
-                        <div class="members-list">
-                            <?= GridView::widget([
-                                'dataProvider' => $dataProvider,
-                                'tableOptions' => ['class' => 'table table-members'],
-                                'columns' => [
-                                    [
-                                        'format' => 'text',
-                                        'header' => Yii::t('app', 'Member'),
-                                        'value' => function ($user) { return "$user->first_name $user->last_name"; },
+                        <div class="members-block">
+                            <h3>Members</h3>
+                            <div class="members-list">
+                                <?= GridView::widget([
+                                    'dataProvider' => $dataProvider,
+                                    'tableOptions' => ['class' => 'table table-members'],
+                                    'columns' => [
+                                        [
+                                            'format' => 'text',
+                                            'header' => Yii::t('app', 'Member'),
+                                            'value' => function ($user) { return "$user->first_name $user->last_name"; },
+                                        ],
+                                        [
+                                            'value' => function ($user, $key, $index, $column) use ($group) {
+                                                return $user->getRole($group->id)->item_name;
+                                            },
+                                            'format' =>'raw',
+                                            'header' => Yii::t('app', 'Role'),
+                                        ],
                                     ],
-                                    [
-                                        'value' => function ($user, $key, $index, $column) use ($group) {
-                                            return $user->getRole($group->id)->item_name;
-                                        },
-                                        'format' =>'raw',
-                                        'header' => Yii::t('app', 'Role'),
-                                    ],
-                                ],
-                            ]) ?>
+                                ]) ?>
+                            </div>
                         </div>
-                        <h3>Group chat</h3>
-                        <div class="group-chat">
+                        <div class="chat-block">
+                            <h3>Group chat</h3>
+                            <div class="group-chat">
 
+                            </div>
+                            <div class="chat-send">
+                                <form id="chat-form">
+                                    <textarea class="chat-message-input" placeholder="<?= Yii::t('app', 'Message...') ?>"></textarea>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

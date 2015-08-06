@@ -2,4 +2,6 @@
 
 use yii\helpers\HtmlPurifier;
 
-echo HTMLPurifier::process(json_encode($result));
+$data = [ 'result' => $result ];
+
+echo HTMLPurifier::process(json_encode($data));

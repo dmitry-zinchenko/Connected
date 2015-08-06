@@ -13,6 +13,7 @@ class WorkspaceController extends \yii\web\Controller
     public function actionIndex($identifier)
     {
         if($group = Groups::findGroupByIdentifier($identifier)) {
+
             return $this->render('index', [
                 'group' => $group,
             ]);

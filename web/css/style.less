@@ -949,6 +949,7 @@ a.btn:visited {
   padding: 0;
 }
 
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 62px;
@@ -975,10 +976,18 @@ a.btn:visited {
   }
 }
 
+.members-block {
+  width: 100%;
+  height: 40%;
+}
+.chat-block {
+  width: 100%;
+  height: 60%;
+}
+
 .members-list, .group-chat {
   margin: 10px 0;
   width: 100%;
-  height: 46%;
   .scroll-bar {
     opacity: 0;
     .transition(opacity);
@@ -988,16 +997,22 @@ a.btn:visited {
   }
 }
 
-.members-list, .group-chat {
+.members-list {
+  height: 80%;
+}
+
+.group-chat {
+  height: 70%;
 }
 
 .members-list {
-
   table {
     min-width: 210px;
     max-width: 210px;
     border: none;
+    font-size: 12px;
     tr, td {
+      padding: 0 0 5px !important;
       border: none !important;
     }
   }
@@ -1005,6 +1020,50 @@ a.btn:visited {
     display: none;
   }
 }
+
+.chat-send {
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid @indigo100;
+  #chat-form {
+    height: 50px;
+  }
+  .chat-message-input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+  }
+}
+
+.message {
+  margin-bottom: 10px;
+  min-width: 210px;
+  max-width: 210px;
+  font-size: 12px;
+}
+.message-info {
+  position: relative;
+  margin-bottom: 5px;
+  .message-author {
+
+  }
+  .message-time {
+    position: absolute;
+    top: 0; right: 0;
+    color: @secondaryText;
+  }
+  .message-text {
+
+  }
+}
+/* --- Sidebar */
 
 .content-work {
   position: relative;
@@ -1037,3 +1096,6 @@ a.btn:visited {
 /* --- WORKSPACE */
 /* */
 
+#yii-debug-toolbar-min {
+  display: none !important;
+}

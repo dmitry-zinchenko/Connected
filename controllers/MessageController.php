@@ -38,19 +38,7 @@ class MessageController extends Controller
         $headers->add('Content-Type', 'application/json; charset=utf-8');
 
         if(\Yii::$app->user->can('AccessGroup',['group'=>$this->group])) {
-            $model = new Messages();
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                $this->redirect(Url::toRoute(['message/index', 'group' => $this->group->identifier]));
-            }
-
-            $dataProvider = new ActiveDataProvider([
-                'query' => Messages::find()->where(['group_id' => $this->group->id]),
-            ]);
-
-            $model->group_id = $this->group->id;
-            $model->author_id = \Yii::$app->user->getId();
-
-            $messages = Messages::find()->where(['group_id' => $this->group->id])->all();
+            $messages = Messages::find()->where(['group_id' => $this->group->id])->orderBy('id')->all();
 
             return $this->renderPartial('index', [
                 'messages' => $messages,
@@ -72,9 +60,7 @@ class MessageController extends Controller
 
         if(\Yii::$app->user->can('AccessGroup',[ 'group' => $this->group ])) {
             $model = new Messages(
-                \Yii::$app->user->getId(),
                 \Yii::$app->request->post('text'),
-                new Expression('NOW()'),
                 $this->group->id
             );
             $result = $model->create();
