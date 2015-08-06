@@ -30,7 +30,7 @@ class WorkspaceController extends \yii\web\Controller
     {
         if(!\Yii::$app->user->isGuest && \Yii::$app->user->can('AccessGroup',['group'=>$this->group])) {
             if($this->group) {
-                $query = Notices::find()->where(['group_id' => $this->group->id])->all();
+                $query = Notices::find()->where(['group_id' => $this->group->id])->orderBy(['create_at' => SORT_DESC])->all();
                 $dataProvider = new ArrayDataProvider([
                     'allModels' => $query,
                     'key' => 'id',
@@ -68,7 +68,7 @@ class WorkspaceController extends \yii\web\Controller
             $model_comments->notice_id = $id;
 
             $dataProvider = new ActiveDataProvider([
-                'query' => Comments::find()->where(['notice_id' => $id]),
+                'query' => Comments::find()->where(['notice_id' => $id])->orderBy(['created_at' => SORT_DESC]),
                 'key' => 'id',
             ]);
 
@@ -87,6 +87,7 @@ class WorkspaceController extends \yii\web\Controller
     public function actionCreate()
     {
         if(\Yii::$app->user->can('createPost')) {
+
             $model = new Notices();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
