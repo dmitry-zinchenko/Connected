@@ -15,7 +15,7 @@ $this->title = Yii::t('app', 'Dashboard');
                 <a class="group-settings" href="<?= Url::to([ 'group-settings', 'identifier' => $group->identifier ]) ?>"></a>
                 <h3><?= Html::encode($group->name) ?></h3>
                 <p class="group-description"><?= Html::encode($group->description) ?></p>
-                <a href="<?= Url::to(["workspace/".$group->identifier]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
+                <a href="<?= Url::to(["workspace/", "identifier" => $group->identifier]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
@@ -32,7 +32,7 @@ $this->title = Yii::t('app', 'Dashboard');
         <div class="group-block">
             <h3><?= Html::encode($group->name) ?></h3>
             <p class="group-description"><?= Html::encode($group->description) ?></p>
-            <a href="<?= Url::to(["workspace/$group->identifier"]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
+            <a href="<?= Url::to(["workspace/", "identifier" => $group->identifier]) ?>" class="group-open btn btn-success"><?= Yii::t('app', 'Open') ?></a>
         </div>
     <?php endforeach; ?>
 </div>

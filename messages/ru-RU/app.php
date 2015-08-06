@@ -120,4 +120,7 @@ return [
 
     'Back to dashboard' => 'Вернуться в панель управления',
     'There is no group with identifier {id}' => 'Группы с идентификатором {id} не существует',
+    'Workspace' => 'Рабочее место',
+
+
 ];

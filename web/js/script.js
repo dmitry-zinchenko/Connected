@@ -132,13 +132,16 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-
     getChatMessages( { group: groupIdentifier, } );
+    setInterval(function() {
+        getChatMessages( { group: groupIdentifier, } );
+    }, 5000);
+
 
     function getChatMessages(params) {
         $.ajax({
             type: 'get',
-            url: '/message',
+            url: baseUrl + '/message',
             data: params,
             cache: false,
             response: 'json',
@@ -150,17 +153,23 @@ $(document).ready(function() {
     }
 
     function fillChat (response) {
+        var scrollToEnd = false;
+        var top = parseInt($(".group-chat .overview").css('top'), 10) <= 0 ? parseInt($(".group-chat .overview").css('top'), 10) : null;
+        if((top === null) || ($('#chat-form').attr('data') === 'submitted')) {
+            scrollToEnd = true;
+        }
         $('.group-chat').text('');
+        $('#chat-form').removeAttr('data');
         $.each(response.messages, function(index, value) {
             var massageTime = getMessageTimeFromString(value.created_at);
 
             $('.group-chat').append(
                 '<div class="message">' +
-                '<div class="message-info">' +
-                '<div class="message-autor">' + value.author + '</div>' +
-                '<div class="message-time">' + massageTime + '</div>' +
-                '</div>' +
-                '<div class="message-text">' + value.text + '</div>' +
+                    '<div class="message-info">' +
+                        '<div class="message-autor">' + value.author + '</div>' +
+                        '<div class="message-time">' + massageTime + '</div>' +
+                    '</div>' +
+                    '<div class="message-text">' + value.text + '</div>' +
                 '</div>'
             );
         })
@@ -169,9 +178,14 @@ $(document).ready(function() {
             hScroll: false,
             updateOnWindowResize: true,
             wheelSpeed: 30,
+            animationSpeed: 0,
         });
 
-        $(".group-chat").customScrollbar("scrollByY", parseInt($(".group-chat .overview").css('height'), 10));
+        if(scrollToEnd) {
+            $(".group-chat").customScrollbar("scrollByY", parseInt($(".group-chat .overview").css('height'), 10));
+        } else {
+            $(".group-chat").customScrollbar("scrollByY", -top);
+        }
     }
 
     function getMessageTimeFromString(string) {
@@ -203,7 +217,7 @@ $(document).ready(function() {
     function sendChatMessage(params) {
         $.ajax({
             type: 'post',
-            url: '/message/send',
+            url: baseUrl + '/message/send',
             data: params,
             cache: false,
             response: 'json',
@@ -225,6 +239,7 @@ $(document).ready(function() {
 
     $('#chat-form').on('submit', function(event) {
         event.preventDefault();
+        $(this).attr('data', 'submitted');
         sendChatMessage(
             {
                 group: groupIdentifier,

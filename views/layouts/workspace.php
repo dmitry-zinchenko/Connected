@@ -32,7 +32,9 @@ $dataProvider = new ActiveDataProvider([
     ],
 ]);
 
+
 $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
+$this->registerJs("var baseUrl = '" . Yii::$app->request->baseUrl . "';", View::POS_END);
 
 ?>
 <?php $this->beginPage() ?>
@@ -59,7 +61,7 @@ $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
                 'title' => 'Back to dashboard',
             ],
             'options' => [
-                'class' => 'navbar-default navbar-dashboard',
+                'class' => 'navbar-fixed-top navbar-dashboard',
 
             ],
         ]);
