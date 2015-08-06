@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ListView;
 use app\models\Groups;
 use yii\helpers\Url;
 
@@ -20,42 +21,47 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a(Yii::t('app', 'Create Notice'), Url::to(['create','group_identifier'=>$group->identifier]), ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?= ListView::widget([
         'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        'itemOptions' => ['class' => 'item'],
+        'itemView' => '_list_item',
 
-            'title',
-            'text',
-            'author.first_name',
-            'create_at',
+        'pager' => ['class' => kop\y2sp\ScrollPager::className(),'negativeMargin' => 500]
 
-            ['class' => 'yii\grid\ActionColumn',
-                //'template' => '{view} {update} {delete}',
-
-                'buttons'=>[
-                    'view' => function ($url, $model, $key) {
-                        return Html::a(Yii::t('app', 'View'), Url::to(['notice/view', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
-
-                        },
-
-                    'update' => function ($url, $model, $group) {
-                        return Html::a(Yii::t('app', 'Update'), Url::to(['notice/update', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
-
-                    },
-
-                    'delete' => function ($url, $model, $group) {
-                        return Html::a(Yii::t('app', 'Delete'), Url::to(['notice/delete', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]), [
-                            //'class' => 'btn btn-danger',
-                            'data' => [
-                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                'method' => 'post',
-                            ]
-                        ]);
-                    }
-                ],
-            ],
-        ],
+//        'columns' => [
+//            ['class' => 'yii\grid\SerialColumn'],
+//
+//            'title',
+//            'text',
+//            'author.first_name',
+//            'create_at',
+//
+//            ['class' => 'yii\grid\ActionColumn',
+//                //'template' => '{view} {update} {delete}',
+//
+//                'buttons'=>[
+//                    'view' => function ($url, $model, $key) {
+//                        return Html::a(Yii::t('app', 'View'), Url::to(['notice/view', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
+//
+//                        },
+//
+//                    'update' => function ($url, $model, $group) {
+//                        return Html::a(Yii::t('app', 'Update'), Url::to(['notice/update', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]));
+//
+//                    },
+//
+//                    'delete' => function ($url, $model, $group) {
+//                        return Html::a(Yii::t('app', 'Delete'), Url::to(['notice/delete', 'id' => $model->id, 'group_identifier' => Groups::findOne($model->group_id)->identifier]), [
+//                            //'class' => 'btn btn-danger',
+//                            'data' => [
+//                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+//                                'method' => 'post',
+//                            ]
+//                        ]);
+//                    }
+//                ],
+//            ],
+//        ],
     ]); ?>
 
 </div>

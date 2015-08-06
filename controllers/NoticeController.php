@@ -24,8 +24,8 @@ class NoticeController extends Controller
     private $group;
     public function beforeAction($action)
     {
-        if (parent::beforeAction($action)) {
-            $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('group_identifier')])->one();
+        if (parent::beforeAction($action) && !empty(\Yii::$app->request->get('identifier'))){
+            $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('identifier')])->one();
             return true;
         }
         return false;
@@ -38,6 +38,7 @@ class NoticeController extends Controller
             $dataProvider = new ArrayDataProvider([
                 'allModels' => $query,
                 'key' => 'id',
+
             ]);
 
             return $this->render('index', [
