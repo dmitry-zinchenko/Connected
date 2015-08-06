@@ -11,11 +11,10 @@ Yii::$app->view->params['members'] = $group->getMembersWithOwner();
 
 $this->title = Html::encode($group->name . ' - ') . Yii::t('app', 'Workspace');
 ?>
-<h1>workspace/index</h1>
 
-<p>
-    <?= Html::a(Yii::t('app', 'Create Notice'), Url::to(['create','identifier'=>$group->identifier]), ['class' => 'btn btn-success']) ?>
-</p>
+<div class="new-notice-buton">
+    <?= Html::a('', Url::to(['create','identifier'=>$group->identifier]), ['class' => 'new-notice-link']) ?>
+</div>
 
 <div class="notice-list">
 
