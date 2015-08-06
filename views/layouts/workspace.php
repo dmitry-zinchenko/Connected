@@ -32,7 +32,9 @@ $dataProvider = new ActiveDataProvider([
     ],
 ]);
 
+
 $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
+$this->registerJs("var baseUrl = '" . Yii::$app->request->baseUrl . "';", View::POS_END);
 
 ?>
 <?php $this->beginPage() ?>
@@ -56,21 +58,21 @@ $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
             'brandLabel' => '',
             'brandUrl' => Yii::$app->homeUrl,
             'brandOptions' => [
-                'title' => 'Back to dashboard',
+                'title' => Yii::t('app', 'Back to dashboard'),
             ],
             'options' => [
-                'class' => 'navbar-default navbar-dashboard',
+                'class' => 'navbar-fixed-top navbar-dashboard',
 
             ],
         ]);
         echo Html::tag('span', $group->name, [ 'class' => 'group-name']);
         echo Html::tag('button', '', [ 'class' => 'button-sidebar-open', 'title' => Yii::t('app', 'Open sidebar') ]);
         echo ButtonDropdown::widget([
-            'label' => 'Add storage',
+            'label' => Yii::t('app', 'Add storage'),
             'dropdown' => [
                 'items' => [
                     [
-                        'label' => 'Coming soon',
+                        'label' => Yii::t('app', 'Coming soon'),
                         'url' => '#'
                     ],
                 ],
@@ -89,7 +91,7 @@ $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
             'options' => ['class' => 'navbar-nav navbar-right nav-work'],
             'items' => [
                 [
-                    'label' => 'Add storage (coming soon)',
+                    'label' => Yii::t('app', 'Add storage') . Html::encode(' (') .  Yii::t('app', 'Coming soon') . Html::encode(')'),
                     'url' => '#',
                 ],
             ],
@@ -105,7 +107,7 @@ $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
                 <div class="sidebar-wrap">
                     <div class="sidebar-content">
                         <div class="members-block">
-                            <h3>Members</h3>
+                            <h3><?= Yii::t('app', 'Members') ?></h3>
                             <div class="members-list">
                                 <?= GridView::widget([
                                     'dataProvider' => $dataProvider,
@@ -128,7 +130,7 @@ $this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
                             </div>
                         </div>
                         <div class="chat-block">
-                            <h3>Group chat</h3>
+                            <h3><?= Yii::t('app', 'Group chat') ?></h3>
                             <div class="group-chat">
 
                             </div>

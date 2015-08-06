@@ -8,7 +8,10 @@ use app\models\Groups;
 use yii\helpers\Url;
 Yii::$app->view->params['group'] = $group;
 Yii::$app->view->params['members'] = $group->getMembersWithOwner();
+
+$this->title = Html::encode($group->name . ' - ') . Yii::t('app', 'Workspace');
 ?>
+<h1>workspace/index</h1>
 
 <p>
     <?= Html::a(Yii::t('app', 'Create Notice'), Url::to(['create','group_identifier'=>$group->identifier]), ['class' => 'btn btn-success']) ?>

@@ -118,6 +118,10 @@ return [
     'Search results for tag "{tag}"' => 'Результаты поиска по тегу "{tag}"',
     'Nothing\'s found...' => 'Ничего не найдено...',
 
+    'Workspace' => 'Рабочее место',
     'Back to dashboard' => 'Вернуться в панель управления',
     'There is no group with identifier {id}' => 'Группы с идентификатором {id} не существует',
+    'Add storage' => 'Хранилище',
+
+
 ];
