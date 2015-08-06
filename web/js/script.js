@@ -133,6 +133,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 
     getChatMessages( { group: groupIdentifier, } );
+    $('.sidebar').css('visibility', 'visible');
     setInterval(function() {
         getChatMessages( { group: groupIdentifier, } );
     }, 5000);
