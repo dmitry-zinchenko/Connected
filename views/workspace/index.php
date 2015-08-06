@@ -14,7 +14,7 @@ $this->title = Html::encode($group->name . ' - ') . Yii::t('app', 'Workspace');
 <h1>workspace/index</h1>
 
 <p>
-    <?= Html::a(Yii::t('app', 'Create Notice'), Url::to(['create','group_identifier'=>$group->identifier]), ['class' => 'btn btn-success']) ?>
+    <?= Html::a(Yii::t('app', 'Create Notice'), Url::to(['create','identifier'=>$group->identifier]), ['class' => 'btn btn-success']) ?>
 </p>
 
 <div class="notice-list">
@@ -23,8 +23,8 @@ $this->title = Html::encode($group->name . ' - ') . Yii::t('app', 'Workspace');
     'dataProvider' => $dataProvider,
     'itemOptions' => ['class' => 'item'],
     'itemView' => '_list_item',
-
     'pager' => ['class' => kop\y2sp\ScrollPager::className(),'negativeMargin' => 500]
-]); ?>
+    ]);
+?>
 
 </div>

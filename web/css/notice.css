@@ -29,9 +29,15 @@
 {
     margin-top: 7px;
     margin-bottom: 25px;
+    word-wrap: break-word;
 }
 
 .notice-list a
 {
     color: #303F9F;
+}
+
+.UD
+{
+    float: right;
 }
