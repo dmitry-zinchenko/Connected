@@ -9,10 +9,10 @@ use yii\helpers\Html;
         <?= Html::a('Delete', Url::to(['deletecomment','identifier' => \Yii::$app->request->get('identifier'), 'id_comment' => $model->id])); ?>
     </div>
     <div class="notice-text">
-        <?= $model->text; ?>
+        <?= Html::encode($model->text); ?>
     </div>
     <div class="author-comment">
-        <?= $model->author->first_name . ' ' . $model->author->last_name. ' '. $model->created_at;  ?>
+        <?= Html::encode($model->author->first_name . ' ' . $model->author->last_name. ' '. $model->created_at);  ?>
     </div>
     <div class="clear"></div>
 </div>
