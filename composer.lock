@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "22854c68120500a0e8abdb6ab1eb14f6",
+    "hash": "026fd74f175f19725c4585fe6a8d56f4",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -317,108 +317,17 @@
             "time": "2013-11-30 08:25:19"
         },
         {
-            "name": "kop/yii2-scroll-pager",
-            "version": "2.2.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kop/yii2-scroll-pager.git",
-                "reference": "9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c",
-                "reference": "9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "webcreate/jquery-ias": "~2.2.0",
-                "yiisoft/yii2": "*"
-            },
-            "require-dev": {
-                "codeception/codeception": "~2.0"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "kop\\y2sp\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ivan Koptiev",
-                    "email": "ivan.koptiev@codex.systems",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Infinite AJAX scrolling for Yii2 ListView widget",
-            "homepage": "http://kop.github.io/yii2-scroll-pager/",
-            "keywords": [
-                "pager",
-                "pagination",
-                "scroll",
-                "scrolling",
-                "yii",
-                "yii2"
-            ],
-            "time": "2015-04-18 11:16:23"
-        },
-        {
-            "name": "webcreate/jquery-ias",
-            "version": "v2.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webcreate/infinite-ajax-scroll.git",
-                "reference": "7380f74fca64180a4c5da18d01065a8aef0494b7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webcreate/infinite-ajax-scroll/zipball/7380f74fca64180a4c5da18d01065a8aef0494b7",
-                "reference": "7380f74fca64180a4c5da18d01065a8aef0494b7",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "proprietary",
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "fieg",
-                    "email": "jeroen@fieg.nl",
-                    "homepage": "http://webcreate.nl"
-                }
-            ],
-            "description": "Infinite AJAX Scroll: A jQuery plugin that turns your server-side pagination into an infinite scrolling one using AJAX",
-            "homepage": "http://infiniteajaxscroll.com",
-            "keywords": [
-                "ajax",
-                "ias",
-                "infinite",
-                "jquery",
-                "pagination",
-                "scroll",
-                "scrolling"
-            ],
-            "time": "2015-05-08 14:58:16"
-        },
-        {
             "name": "yiisoft/yii2",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727"
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
-                "reference": "ea8c13b9f5cd437bd7bf73cad8a3457a155f3727",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/f42b2eb80f61992438661b01d0d74c6738e2ff38",
+                "reference": "f42b2eb80f61992438661b01d0d74c6738e2ff38",
                 "shasum": ""
             },
             "require": {
@@ -493,7 +402,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2015-07-11 02:37:59"
+            "time": "2015-08-05 22:00:30"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
@@ -669,6 +578,57 @@
             }
         },
         {
+            "name": "kop/yii2-scroll-pager",
+            "version": "2.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kop/yii2-scroll-pager.git",
+                "reference": "9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kop/yii2-scroll-pager/zipball/9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c",
+                "reference": "9f0b76b1b695c53f09fdcf62eefc0b6c39e6697c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "webcreate/jquery-ias": "~2.2.0",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "codeception/codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kop\\y2sp\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Koptiev",
+                    "email": "ivan.koptiev@codex.systems",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Infinite AJAX scrolling for Yii2 ListView widget",
+            "homepage": "http://kop.github.io/yii2-scroll-pager/",
+            "keywords": [
+                "pager",
+                "pagination",
+                "scroll",
+                "scrolling",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-04-18 11:16:23"
+        },
+        {
             "name": "phpspec/php-diff",
             "version": "v1.0.2",
             "source": {
@@ -701,6 +661,46 @@
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
             "time": "2013-11-01 13:02:21"
+        },
+        {
+            "name": "webcreate/jquery-ias",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webcreate/infinite-ajax-scroll.git",
+                "reference": "7380f74fca64180a4c5da18d01065a8aef0494b7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webcreate/infinite-ajax-scroll/zipball/7380f74fca64180a4c5da18d01065a8aef0494b7",
+                "reference": "7380f74fca64180a4c5da18d01065a8aef0494b7",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary",
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "fieg",
+                    "email": "jeroen@fieg.nl",
+                    "homepage": "http://webcreate.nl"
+                }
+            ],
+            "description": "Infinite AJAX Scroll: A jQuery plugin that turns your server-side pagination into an infinite scrolling one using AJAX",
+            "homepage": "http://infiniteajaxscroll.com",
+            "keywords": [
+                "ajax",
+                "ias",
+                "infinite",
+                "jquery",
+                "pagination",
+                "scroll",
+                "scrolling"
+            ],
+            "time": "2015-05-08 14:58:16"
         },
         {
             "name": "yiisoft/yii2-gii",
