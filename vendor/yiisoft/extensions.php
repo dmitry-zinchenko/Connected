@@ -21,15 +21,6 @@ return array (
       '@yii/gii' => $vendorDir . '/yiisoft/yii2-gii',
     ),
   ),
-  'kop/yii2-scroll-pager' => 
-  array (
-    'name' => 'kop/yii2-scroll-pager',
-    'version' => '2.2.4.0',
-    'alias' => 
-    array (
-      '@kop/y2sp' => $vendorDir . '/kop/yii2-scroll-pager',
-    ),
-  ),
   'yiisoft/yii2-debug' => 
   array (
     'name' => 'yiisoft/yii2-debug',
@@ -64,6 +55,15 @@ return array (
     'alias' => 
     array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
+    ),
+  ),
+  'kop/yii2-scroll-pager' => 
+  array (
+    'name' => 'kop/yii2-scroll-pager',
+    'version' => '2.2.4.0',
+    'alias' => 
+    array (
+      '@kop/y2sp' => $vendorDir . '/kop/yii2-scroll-pager',
     ),
   ),
 );
