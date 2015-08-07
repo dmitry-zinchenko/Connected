@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\UserGroups;
 use Yii;
 use app\models\Notices;
 use app\models\Comments;
@@ -11,6 +12,8 @@ use app\models\Groups;
 use yii\helpers\Url;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
+use app\models\Users;
+use yii\filters\AccessControl;
 
 class WorkspaceController extends \yii\web\Controller
 {
@@ -21,7 +24,18 @@ class WorkspaceController extends \yii\web\Controller
     {
         if (parent::beforeAction($action) && !empty(\Yii::$app->request->get('identifier'))){
             $this->group = Groups::find()->where(['identifier' => \Yii::$app->request->get('identifier')])->one();
-            return true;
+            $roleId=UserGroups::find()->where(['group_id'=>$this->group->id, 'user_id' => \Yii::$app->user->getId()])->one()->role_id;
+            $roleName = \Yii::$app->params['authRoles'][$roleId - 1];
+
+            if($roleName) {
+                \Yii::$app->db->createCommand('DELETE FROM auth_assignment WHERE user_id = :userId')
+                    ->bindValue(':userId', \Yii::$app->user->getId())->execute();
+                $auth = Yii::$app->authManager;
+                $authorRole = $auth->getRole($roleName);
+                $auth->assign($authorRole, \Yii::$app->user->getId());
+
+                return true;
+            }
         }
         return false;
     }
@@ -47,9 +61,7 @@ class WorkspaceController extends \yii\web\Controller
                     'id' => $this->group->identifier,
                 ]));
             }
-        }
-        else
-        {
+        } else {
             throw new ForbiddenHttpException('Access denied');
         }
 
@@ -87,7 +99,6 @@ class WorkspaceController extends \yii\web\Controller
     public function actionCreate()
     {
         if(\Yii::$app->user->can('createPost')) {
-
             $model = new Notices();
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -111,7 +122,7 @@ class WorkspaceController extends \yii\web\Controller
 
     public function actionUpdate($id)
     {
-        if(\Yii::$app->user->can('updateOwnPost',['updatePost'=>$this->findModel($id)])) {
+        if(\Yii::$app->user->can('updateOwnPost', ['updatePost'=>$this->findModel($id)])) {
             $model = $this->findModel($id);
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {

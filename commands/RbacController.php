@@ -82,8 +82,14 @@ class RbacController extends Controller
         $auth->add($member);
 
 
+        $rule = new \app\rbac\UserGroupRule;
+        $auth->add($rule);
+
+
+
         // add "author" role and give this role the "createPost" permission
         $user = $auth->createRole('user');
+        $user->ruleName = $rule->name;
         $auth->add($user);
         $auth->addChild($user, $createGroup);
         $auth->addChild($user, $chat);
@@ -94,6 +100,7 @@ class RbacController extends Controller
 
         // add "author" role and give this role the "createPost" permission
         $author = $auth->createRole('author');
+        $author->ruleName = $rule->name;
         $auth->add($author);
         
         $auth->addChild($author, $createPost);
@@ -121,6 +128,8 @@ class RbacController extends Controller
         // add "admin" role and give this role the "updatePost" permission
         // as well as the permissions of the "author" role
         $owner = $auth->createRole('owner');
+        $rule = new \app\rbac\UserGroupRule;
+        $owner->ruleName = $rule->name;
         $auth->add($owner);
         $auth->addChild($owner, $deletePost);
         $auth->addChild($owner, $author);
