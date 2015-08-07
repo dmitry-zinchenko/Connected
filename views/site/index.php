@@ -24,7 +24,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
             <div class="row-content">
                 <h2 class="row-header"><?= Html::encode('Create notices') ?></h2>
                 <p><?= Html::encode('You always have a lot to share. Just band your team together and send important information to all at once') ?></p>
-                <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
+                <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/create_notices.png">
             </div>
         </section>
 
@@ -34,11 +34,11 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                 <div class="clearfix cols">
                     <div class="col-sm-6">
                         <p><?= Html::encode('Notices are not just notices! It\'s a platform for discussions and making decisions') ?></p>
-                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
+                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/comments.png">
                     </div>
                     <div class="col-sm-6">
                         <p><?= Html::encode('If it\'s a quick question or you need to send a link to all your colleagues you can use group chat.') ?></p>
-                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
+                        <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/group_chat.png">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,6 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
             <div class="row-content">
                 <h2 class="row-header"><?= Html::encode('Use tags') ?></h2>
                 <p><?= Html::encode('Categorize notices with tags. Just add keywords to your notice and use them for searching.') ?></p>
-                <img class="row-image" src="<?= Yii::$app->request->baseUrl ?>/images/screenshot_notices.jpg">
             </div>
         </section>
 
@@ -63,7 +62,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                                 <p><?= Html::encode('You can create and participate unlimited amount of groups.') ?></p>
                             </div>
                             <div class="feature-image">
-                                <img src="">
+                                <img src="<?= Yii::$app->request->baseUrl ?>/images/unlim_groups.png">
                             </div>
                         </section>
                     </div>
@@ -74,7 +73,7 @@ $this->title = Yii::t('app', 'Connected - a platform to collaborate with team');
                                 <p><?= Html::encode('You decide, who can view, create and manage content in your group.') ?></p>
                             </div>
                             <div class="feature-image">
-                                <img src="">
+                                <img src="<?= Yii::$app->request->baseUrl ?>/images/privileges.png">
                             </div>
                         </section>
                     </div>
