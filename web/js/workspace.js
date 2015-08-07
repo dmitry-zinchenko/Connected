@@ -114,25 +114,27 @@ $(document).ready(function() {
         cookie = $.cookie('sidebar');
     }
 
-});
-
-$(window).on('resize', function() {
-    if(window.innerWidth > 767) {
-        $('.sidebar').css('display', 'block');
-        if(cookie === SHOWED) {
-            $('.content-work').css('width', ($(window).width() - $('.sidebar').width()) + 'px');
+    $(window).on('resize', function() {
+        if(window.innerWidth > 767) {
+            $('.sidebar').css('display', 'block');
+            if(cookie === SHOWED) {
+                $('.content-work').css('width', ($(window).width() - $('.sidebar').width()) + 'px');
+            } else {
+                $('.content-work').css('width', '100%');
+            }
         } else {
+            $('.sidebar').css('display', 'none');
             $('.content-work').css('width', '100%');
         }
-    } else {
-        $('.sidebar').css('display', 'none');
-        $('.content-work').css('width', '100%');
-    }
 
-    setSidebarHeight();
-    setNewNoticeButtonPosition();
+        setSidebarHeight();
+        setNewNoticeButtonPosition();
 
-})
+    })
+
+});
+
+
 
 function setNewNoticeButtonPosition() {
     if($('.new-notice-buton').length){
@@ -142,8 +144,6 @@ function setNewNoticeButtonPosition() {
             $('.new-notice-buton').css('left', ($('.notice-list').width() - ($('.new-notice-buton').width())));
         }
     }
-
-
 }
 
 function getChatMessages(params) {
