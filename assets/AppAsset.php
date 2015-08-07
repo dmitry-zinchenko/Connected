@@ -23,7 +23,6 @@ class AppAsset extends AssetBundle
         'css/comment.css',
     ];
     public $js = [
-        'js/script.js',
         'js/jquery.cookie.js',
         'js/jquery.custom-scrollbar.js',
     ];

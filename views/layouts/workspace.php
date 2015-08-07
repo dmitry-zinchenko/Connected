@@ -33,8 +33,10 @@ $dataProvider = new ActiveDataProvider([
 ]);
 
 
-$this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_END);
-$this->registerJs("var baseUrl = '" . Yii::$app->request->baseUrl . "';", View::POS_END);
+$this->registerJs("var groupIdentifier = '$group->identifier';", View::POS_HEAD);
+$this->registerJs("var baseUrl = '" . Yii::$app->request->baseUrl . "';", View::POS_HEAD);
+
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/workspace.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 
 ?>
 <?php $this->beginPage() ?>

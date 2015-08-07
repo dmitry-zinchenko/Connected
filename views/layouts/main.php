@@ -9,7 +9,11 @@ use app\components\Widgets\LanguageSelectorWidget;
 /* @var $content string */
 
 AppAsset::register($this);
+
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/main.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">

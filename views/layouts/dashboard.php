@@ -16,6 +16,8 @@ use app\components\Widgets\LanguageSelectorWidget;
 
 AppAsset::register($this);
 
+$this->registerJsFile(Yii::$app->request->baseUrl . '/js/dashboard.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
